@@ -84,59 +84,187 @@ function initNavbar() {
 }
 
 // ========================================
-// CONTACT FORM
+// CONTACT FORM → email (FormSubmit, static-host friendly)
 // ========================================
-function initContactForm() {
-    const form = document.getElementById('contactForm');
+const CONTACT_INBOX = 'hello@technovasolutions.com';
+const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_INBOX}`;
 
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-
-            console.log('Quote request submitted:', data);
-
-            showNotification('Thanks! We\'ll send you a quote within 24 hours.', 'success');
-
-            form.reset();
-        });
-    }
+function quoteMailtoLink(data) {
+    const subject = 'Quote request — Technova Solutions';
+    const body = [
+        `Name: ${data.name}`,
+        `Company: ${data.company || '—'}`,
+        `Email: ${data.email}`,
+        `Project type: ${data['project-type'] || '—'}`,
+        `Budget: ${data.budget || '—'}`,
+        '',
+        'Message:',
+        data.message || '—'
+    ].join('\n');
+    return `mailto:${CONTACT_INBOX}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-// Notification helper
-function showNotification(message, type = 'info') {
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const btnLabel = submitBtn?.querySelector('span');
+    let submitLabel = btnLabel?.textContent ?? '';
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fd = new FormData(form);
+        if ((fd.get('_honey') || '').toString().trim() !== '') {
+            return;
+        }
+
+        const data = {
+            name: (fd.get('name') || '').toString().trim(),
+            email: (fd.get('email') || '').toString().trim(),
+            company: (fd.get('company') || '').toString().trim(),
+            'project-type': (fd.get('project-type') || '').toString().trim(),
+            budget: (fd.get('budget') || '').toString().trim(),
+            message: (fd.get('message') || '').toString().trim()
+        };
+
+        const payload = {
+            name: data.name,
+            email: data.email,
+            company: data.company || '—',
+            'project-type': data['project-type'] || '—',
+            budget: data.budget || '—',
+            message: data.message || '—',
+            _subject: 'New quote request — Technova Solutions',
+            _template: 'table',
+            _captcha: false
+        };
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
+            if (btnLabel) btnLabel.textContent = 'Sending…';
+        }
+
+        try {
+            const res = await fetch(FORMSUBMIT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const json = await res.json().catch(() => ({}));
+            const ok =
+                res.ok && (json.success === 'true' || json.success === true || json.success === 'True');
+
+            if (ok) {
+                showNotification(
+                    "Thanks! We'll email you within 24 hours with your quote.",
+                    'success'
+                );
+                form.reset();
+            } else {
+                const hint =
+                    typeof json.message === 'string'
+                        ? json.message
+                        : typeof json.error === 'string'
+                          ? json.error
+                          : 'Please try again or use the email link.';
+                showNotification(`Couldn't send: ${hint}`, 'error', {
+                    duration: 8000,
+                    mailtoHref: quoteMailtoLink(data),
+                    mailtoLabel: 'Open email draft'
+                });
+            }
+        } catch {
+            showNotification('Connection problem. Try again in a moment, or open an email draft below.', 'error', {
+                duration: 9000,
+                mailtoHref: quoteMailtoLink(data),
+                mailtoLabel: 'Open email draft'
+            });
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.removeAttribute('aria-busy');
+                if (btnLabel && submitLabel) btnLabel.textContent = submitLabel;
+            }
+        }
+    });
+}
+
+/** @param {{ duration?: number, mailtoHref?: string, mailtoLabel?: string }} [opts] */
+function showNotification(message, type = 'info', opts = {}) {
+    const duration = opts.duration ?? (type === 'error' ? 8000 : 5000);
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <span>${message}</span>
-        <button onclick="this.parentElement.remove()">×</button>
-    `;
+    notification.setAttribute('role', type === 'error' ? 'alert' : 'status');
+
+    const text = document.createElement('span');
+    text.textContent = message;
+
+    const actions = document.createElement('div');
+    actions.style.display = 'flex';
+    actions.style.alignItems = 'center';
+    actions.style.gap = '12px';
+    actions.style.flexWrap = 'wrap';
+    actions.appendChild(text);
+
+    if (opts.mailtoHref && opts.mailtoLabel) {
+        const mail = document.createElement('a');
+        mail.href = opts.mailtoHref;
+        mail.textContent = opts.mailtoLabel;
+        mail.style.color = 'inherit';
+        mail.style.fontWeight = '700';
+        mail.style.textDecoration = 'underline';
+        mail.style.whiteSpace = 'nowrap';
+        actions.appendChild(mail);
+    }
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.textContent = '×';
+    closeBtn.setAttribute('aria-label', 'Dismiss');
+    closeBtn.addEventListener('click', () => notification.remove());
+
+    notification.appendChild(actions);
+    notification.appendChild(closeBtn);
+
+    const bg = type === 'success' ? '#22c55e' : type === 'error' ? '#ef4444' : '#d4af37';
+    const fg = type === 'success' || type === 'error' ? '#fff' : '#0a0a0a';
 
     Object.assign(notification.style, {
         position: 'fixed',
         bottom: '24px',
         right: '24px',
-        padding: '18px 28px',
-        background: type === 'success' ? '#22c55e' : '#d4af37',
-        color: type === 'success' ? '#fff' : '#0a0a0a',
+        maxWidth: 'min(420px, calc(100vw - 32px))',
+        padding: '18px 20px',
+        background: bg,
+        color: fg,
         borderRadius: '12px',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
         gap: '16px',
         boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
         zIndex: '9999',
         animation: 'slideIn 0.3s ease',
-        fontWeight: '500'
+        fontWeight: '500',
+        lineHeight: '1.45'
     });
 
     document.body.appendChild(notification);
 
-    setTimeout(() => {
+    const t = setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
-    }, 5000);
+    }, duration);
+
+    closeBtn.addEventListener('click', () => clearTimeout(t));
 }
 
 // ========================================
