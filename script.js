@@ -16,38 +16,69 @@ function initNavbar() {
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
 
+    const mqMobile = window.matchMedia('(max-width: 768px)');
+
+    function closeMobileMenu() {
+        if (!navLinks || !mobileToggle) return;
+        navLinks.classList.remove('active');
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileToggle.setAttribute('aria-label', 'Open menu');
+        document.body.classList.remove('nav-open');
+    }
+
+    function openMobileMenu() {
+        if (!navLinks || !mobileToggle) return;
+        navLinks.classList.add('active');
+        mobileToggle.classList.add('active');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        mobileToggle.setAttribute('aria-label', 'Close menu');
+        document.body.classList.add('nav-open');
+    }
+
     // Scroll effect
     window.addEventListener('scroll', () => {
+        if (!navbar) return;
         if (window.scrollY > 50) {
-            navbar.style.padding = '12px 0';
-            navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-        } else {
-            navbar.style.padding = '20px 0';
+            navbar.style.padding = '14px 0';
             navbar.style.background = 'rgba(10, 10, 10, 0.92)';
+        } else {
+            navbar.style.padding = '16px 0';
+            navbar.style.background = 'rgba(10, 10, 10, 0.78)';
         }
     });
 
-    // Mobile menu toggle
-    if (mobileToggle) {
+    if (mobileToggle && navLinks) {
         mobileToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileToggle.classList.toggle('active');
+            const willOpen = !navLinks.classList.contains('active');
+            if (willOpen) {
+                openMobileMenu();
+            } else {
+                closeMobileMenu();
+            }
         });
     }
 
-    // Smooth scroll for nav links
+    mqMobile.addEventListener('change', (e) => {
+        if (!e.matches) closeMobileMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobileMenu();
+    });
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (!target) return;
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                navLinks.classList.remove('active');
-                mobileToggle.classList.remove('active');
-            }
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            closeMobileMenu();
         });
     });
 }
@@ -112,6 +143,10 @@ function showNotification(message, type = 'info') {
 // SCROLL ANIMATIONS
 // ========================================
 function initScrollAnimations() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -169,42 +204,6 @@ style.textContent = `
         }
     }
 
-    /* Mobile nav styles */
-    @media (max-width: 768px) {
-        .nav-links {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.98);
-            flex-direction: column;
-            padding: 24px;
-            gap: 16px;
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .nav-links.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .mobile-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-    }
 `;
 document.head.appendChild(style);
 
