@@ -136,7 +136,7 @@ function initContactForm() {
             'project-type': data['project-type'] || '—',
             budget: data.budget || '—',
             message: data.message || '—',
-            _subject: 'New quote request — Technova Solutions',
+            _subject: 'New inquiry — Technova Solutions (ERP / AI / Web)',
             _template: 'table',
             _captcha: false
         };

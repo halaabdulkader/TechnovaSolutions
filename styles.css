@@ -748,6 +748,75 @@ ul, ol {
     gap: 24px;
 }
 
+.browser-content--erp {
+    align-items: stretch;
+    gap: 18px;
+    padding: 24px;
+}
+
+.erp-mock-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.erp-mock-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.erp-mock-chip {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    background: rgba(212, 175, 55, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.erp-mock-modules {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.erp-mock-modules li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.erp-mock-status {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-success);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.metrics-grid--erp {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.metric-value.accent {
+    color: var(--color-primary);
+}
+
 .speed-indicator {
     position: relative;
 }
@@ -1068,6 +1137,38 @@ section {
    ======================================== */
 .pricing {
     background: var(--color-bg);
+}
+
+.pricing-custom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin: 0 auto 40px;
+    padding: 28px 32px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, var(--color-bg-card) 55%);
+    border: 1px solid rgba(212, 175, 55, 0.32);
+    border-radius: var(--radius-lg);
+}
+
+.pricing-custom-copy {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+.pricing-custom-copy h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.pricing-custom-copy p {
+    color: var(--color-text-muted);
+    font-size: 0.98rem;
+    line-height: 1.65;
+    max-width: 46rem;
 }
 
 .pricing-grid {
@@ -1637,6 +1738,17 @@ a.contact-email:hover {
         grid-template-columns: 1fr;
         max-width: 400px;
         margin: 0 auto;
+    }
+
+    .pricing-custom {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px;
+    }
+
+    .pricing-custom .btn {
+        width: 100%;
+        justify-content: center;
     }
     
     .pricing-card.popular {
