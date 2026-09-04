@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
+    initLeadPrefill();
     initContactForm();
     initScrollAnimations();
 });
@@ -88,6 +89,88 @@ function initNavbar() {
 // ========================================
 const CONTACT_INBOX = 'hello@technovasolutions.com';
 const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_INBOX}`;
+const LEAD_PREFILL_KEY = 'technovaLeadPrefill';
+
+function readPrefillFromEl(el) {
+    const mode = el.getAttribute('data-prefill') || '';
+    let projectType = mode;
+    let budget = el.getAttribute('data-budget') || '';
+    if (mode === 'erp') {
+        projectType = 'erp';
+        budget = budget || 'erp-custom';
+    } else if (mode === 'website') {
+        projectType = 'website';
+    }
+    const offer = el.getAttribute('data-offer') || '';
+    let message = '';
+    if (offer === 'manufacturing-starter') {
+        message =
+            'Interested in the Manufacturing ERP Starter Slice (orders, planning, warehouse).';
+    }
+    return { projectType, budget, offer, message };
+}
+
+function applyLeadPrefill(prefill) {
+    const form = document.getElementById('contactForm');
+    if (!form || !prefill) return;
+    const typeEl = form.elements.namedItem('project-type');
+    const budgetEl = form.elements.namedItem('budget');
+    const msgEl = form.elements.namedItem('message');
+    if (prefill.projectType && typeEl) typeEl.value = prefill.projectType;
+    if (prefill.budget && budgetEl) budgetEl.value = prefill.budget;
+    if (prefill.message && msgEl && !String(msgEl.value || '').trim()) {
+        msgEl.value = prefill.message;
+    }
+}
+
+function initLeadPrefill() {
+    document.querySelectorAll('[data-prefill]').forEach((el) => {
+        el.addEventListener('click', () => {
+            const prefill = readPrefillFromEl(el);
+            const href = el.getAttribute('href') || '';
+            const hasLocalForm = Boolean(document.getElementById('contactForm'));
+            const goesHomeHash =
+                href.startsWith('/#') ||
+                href.startsWith('index.html') ||
+                href.includes('index.html#');
+
+            if (hasLocalForm && (href.startsWith('#') || href.includes('#contact'))) {
+                applyLeadPrefill(prefill);
+            } else if (!hasLocalForm || goesHomeHash) {
+                try {
+                    sessionStorage.setItem(LEAD_PREFILL_KEY, JSON.stringify(prefill));
+                } catch (_) {
+                    /* ignore quota / private mode */
+                }
+            } else {
+                applyLeadPrefill(prefill);
+            }
+        });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = {
+        projectType: params.get('type') || '',
+        budget: params.get('budget') || '',
+        offer: params.get('offer') || '',
+        message:
+            params.get('offer') === 'manufacturing-starter'
+                ? 'Interested in the Manufacturing ERP Starter Slice (orders, planning, warehouse).'
+                : ''
+    };
+
+    let stored = null;
+    try {
+        stored = JSON.parse(sessionStorage.getItem(LEAD_PREFILL_KEY) || 'null');
+        if (stored) sessionStorage.removeItem(LEAD_PREFILL_KEY);
+    } catch (_) {
+        stored = null;
+    }
+
+    applyLeadPrefill(
+        stored || (fromUrl.projectType || fromUrl.budget || fromUrl.offer ? fromUrl : null)
+    );
+}
 
 function quoteMailtoLink(data) {
     const subject = 'Quote request — Technova Solutions';
@@ -95,6 +178,8 @@ function quoteMailtoLink(data) {
         `Name: ${data.name}`,
         `Company: ${data.company || '—'}`,
         `Email: ${data.email}`,
+        `Industry: ${data.industry || '—'}`,
+        `Company size: ${data['company-size'] || '—'}`,
         `Project type: ${data['project-type'] || '—'}`,
         `Budget: ${data.budget || '—'}`,
         '',
@@ -124,6 +209,8 @@ function initContactForm() {
             name: (fd.get('name') || '').toString().trim(),
             email: (fd.get('email') || '').toString().trim(),
             company: (fd.get('company') || '').toString().trim(),
+            industry: (fd.get('industry') || '').toString().trim(),
+            'company-size': (fd.get('company-size') || '').toString().trim(),
             'project-type': (fd.get('project-type') || '').toString().trim(),
             budget: (fd.get('budget') || '').toString().trim(),
             message: (fd.get('message') || '').toString().trim()
@@ -133,6 +220,8 @@ function initContactForm() {
             name: data.name,
             email: data.email,
             company: data.company || '—',
+            industry: data.industry || '—',
+            'company-size': data['company-size'] || '—',
             'project-type': data['project-type'] || '—',
             budget: data.budget || '—',
             message: data.message || '—',
@@ -291,7 +380,7 @@ function initScrollAnimations() {
 
     // Observe elements
     const animateElements = document.querySelectorAll(
-        '.service-card, .feature-card, .pricing-card, .process-step, .problem-card'
+        '.service-card, .feature-card, .pricing-card, .process-step, .problem-card, .trust-block, .work-layout'
     );
 
     animateElements.forEach((el, index) => {
