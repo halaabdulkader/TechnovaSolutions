@@ -380,7 +380,7 @@ function initScrollAnimations() {
 
     // Observe elements
     const animateElements = document.querySelectorAll(
-        '.service-card, .feature-card, .pricing-card, .process-step, .problem-card, .trust-block, .work-layout'
+        '.service-card, .feature-card, .pricing-card, .process-step, .problem-card, .trust-block, .work-layout, .portfolio-project'
     );
 
     animateElements.forEach((el, index) => {

@@ -1084,6 +1084,26 @@ section {
     background: var(--color-bg);
 }
 
+.work-featured {
+    margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.work-kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.work-name {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+}
+
 .work-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -1123,6 +1143,82 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+}
+
+.portfolio-heading {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: var(--color-text);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 4vw, 40px);
+}
+
+.portfolio-project {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 0;
+}
+
+.portfolio-media {
+    display: block;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-elevated);
+    aspect-ratio: 9 / 16;
+    max-height: 420px;
+    transition: border-color var(--transition-base) var(--ease-out);
+}
+
+.portfolio-media:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+.portfolio-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+.portfolio-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.portfolio-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.portfolio-desc {
+    color: var(--color-text-muted);
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.portfolio-link {
+    margin-top: 6px;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.portfolio-link:hover {
+    color: var(--color-primary-light);
+    text-decoration: underline;
 }
 
 .app-shell {
@@ -2080,6 +2176,21 @@ a.contact-email:hover {
 
     .work-actions {
         justify-content: center;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+
+    .portfolio-media {
+        max-height: 480px;
+    }
+
+    .portfolio-body {
+        text-align: center;
+        align-items: center;
     }
 
     .trust-grid {
