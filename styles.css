@@ -353,7 +353,8 @@ ul, ol {
     white-space: nowrap;
 }
 
-.nav-links a:not(.nav-cta):hover {
+.nav-links a:not(.nav-cta):hover,
+.nav-links a[aria-current="page"] {
     color: var(--color-primary);
 }
 
@@ -1377,6 +1378,15 @@ section {
     line-height: 1.65;
 }
 
+.offer-teaser--tool {
+    border-top: 0;
+}
+
+.offer-teaser--tool .offer-teaser-inner {
+    padding-top: clamp(40px, 5vw, 72px);
+    padding-bottom: clamp(40px, 5vw, 72px);
+}
+
 .offer-hero {
     padding: clamp(140px, 18vh, 180px) 0 clamp(48px, 6vw, 72px);
     position: relative;
@@ -2073,7 +2083,9 @@ a.contact-email:hover {
 
 .footer-links {
     display: flex;
-    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 16px 32px;
 }
 
 .footer-links a {
@@ -2263,6 +2275,29 @@ a.contact-email:hover {
     }
 }
 
+@media (max-width: 1180px) and (min-width: 769px) {
+    .nav-container {
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: 12px;
+    }
+
+    .navbar .logo-img {
+        max-height: 46px;
+    }
+
+    .nav-links {
+        gap: 8px 10px;
+    }
+
+    .nav-links a {
+        font-size: 0.8125rem;
+    }
+
+    .nav-cta {
+        padding: 8px 12px !important;
+    }
+}
+
 @media (min-width: 1200px) {
     .navbar .logo-img {
         max-height: 68px;
@@ -2348,7 +2383,7 @@ a.contact-email:hover {
     }
 
     .nav-links.active {
-        max-height: min(85vh, 520px);
+        max-height: min(85vh, 640px);
         opacity: 1;
         visibility: visible;
         pointer-events: auto;

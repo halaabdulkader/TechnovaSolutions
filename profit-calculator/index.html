@@ -1,269 +1,325 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Acbak Surprise — Profit Calculator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="page">
-      <header class="masthead">
-        <div>
-          <p class="brand">Acbak Surprise</p>
-          <h1>Profit Calculator</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free profit calculator from Technova Solutions. Price one package at a time and see what the customer pays, what you keep, and the margin. Rates stay in your browser.">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="canonical" href="https://technovasolutions.com/profit-calculator/">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../favicon.svg">
+    <title>Profit Calculator | Technova Solutions</title>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://technovasolutions.com/profit-calculator/">
+    <meta property="og:title" content="Profit Calculator | Technova Solutions">
+    <meta property="og:description" content="Price one package at a time. See what the customer pays, what you keep, and the profit margin.">
+    <meta property="og:site_name" content="Technova Solutions">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Profit Calculator | Technova Solutions">
+    <meta name="twitter:description" content="Price one package at a time. See what the customer pays, what you keep, and the profit margin.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <nav class="navbar" aria-label="Primary">
+        <div class="nav-container">
+            <a href="../index.html" class="logo logo--nav" aria-label="Technova Solutions — home">
+                <img src="../logo.png" alt="" class="logo-img" width="440" height="132" decoding="async" fetchpriority="high">
+            </a>
+            <ul id="site-nav" class="nav-links">
+                <li><a href="../index.html#services">Services</a></li>
+                <li><a href="../index.html#work">Work</a></li>
+                <li><a href="../manufacturing-erp.html">ERP Offer</a></li>
+                <li><a href="index.html" aria-current="page">Profit Calculator</a></li>
+                <li><a href="../index.html#pricing">Engagements</a></li>
+                <li><a href="../index.html#contact" class="nav-cta">Talk to Us</a></li>
+            </ul>
+            <button type="button" class="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <p class="lede">
-          أدخل سعر الباقة وتكاليفها مرة واحدة. الحاسبة تستخرج الضريبة والعمولة، وتعطيك صافي الربح وهامشه.
-        </p>
-      </header>
+    </nav>
 
-      <section class="panel settings" aria-labelledby="settings-title">
-        <div class="panel-head">
-          <div>
-            <p class="index">١</p>
-            <h2 id="settings-title">الإعدادات الثابتة</h2>
-          </div>
-          <p>تبقى محفوظة لكل الباقات إلى أن تغيّرها.</p>
+    <main id="main-content" class="calc-main">
+        <div class="container calc-wrap">
+            <header class="calc-intro">
+                <span class="section-tag">Free tool</span>
+                <h1>Profit <span class="gradient-text">Calculator</span></h1>
+                <p>Price one package at a time. Enter the price and the costs to see what the customer pays, what you keep, and the profit margin.</p>
+            </header>
+
+            <section class="panel settings" aria-labelledby="settings-title">
+                <div class="panel-head">
+                    <div>
+                        <p class="index">1</p>
+                        <h2 id="settings-title">Fixed settings</h2>
+                    </div>
+                    <p>These apply to every package until you change them. Stored in this browser.</p>
+                </div>
+                <div class="settings-grid">
+                    <label class="field" data-rate="games">
+                        <span>VAT for games</span>
+                        <span class="control">
+                            <input id="vatGames" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <span class="suffix">%</span>
+                        </span>
+                    </label>
+                    <label class="field" data-rate="stationery">
+                        <span>VAT for stationery</span>
+                        <span class="control">
+                            <input id="vatStationery" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <span class="suffix">%</span>
+                        </span>
+                    </label>
+                    <label class="field">
+                        <span>Card commission (iyzico)</span>
+                        <span class="control">
+                            <input id="cardCommission" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <span class="suffix">%</span>
+                        </span>
+                    </label>
+                    <label class="field">
+                        <span>Card fee per payment</span>
+                        <span class="control">
+                            <input id="cardFixed" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <span class="suffix">TL</span>
+                        </span>
+                    </label>
+                    <label class="field">
+                        <span>Estimated company tax</span>
+                        <span class="control">
+                            <input id="companyTax" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <span class="suffix">%</span>
+                        </span>
+                    </label>
+                </div>
+                <p class="footnote">Confirm the real rates with your product category, payment contract, and accountant.</p>
+            </section>
+
+            <div class="workspace">
+                <form id="packageForm" class="panel entry" autocomplete="off" novalidate>
+                    <div class="panel-head" id="package-entry">
+                        <div>
+                            <p class="index">2</p>
+                            <h2 id="entry-title">Package</h2>
+                        </div>
+                        <p>Enter this for the package you are pricing.</p>
+                    </div>
+
+                    <label class="field stack">
+                        <span>Package name</span>
+                        <input id="name" type="text" autocomplete="off">
+                    </label>
+
+                    <fieldset class="choice">
+                        <legend>Product type</legend>
+                        <label>
+                            <input type="radio" name="productType" value="games">
+                            <span>Games</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="productType" value="stationery">
+                            <span>Stationery</span>
+                        </label>
+                    </fieldset>
+
+                    <label class="field stack">
+                        <span>Package price</span>
+                        <span class="control">
+                            <input id="price" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <span class="suffix">TL</span>
+                        </span>
+                    </label>
+
+                    <fieldset class="choice">
+                        <legend>Does the package price include VAT?</legend>
+                        <label>
+                            <input type="radio" name="priceIncludesVat" value="yes">
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="priceIncludesVat" value="no">
+                            <span>No</span>
+                        </label>
+                    </fieldset>
+
+                    <div class="cost-grid">
+                        <label class="field stack">
+                            <span>Product cost</span>
+                            <span class="control">
+                                <input id="productCost" inputmode="decimal" autocomplete="off" spellcheck="false">
+                                <span class="suffix">TL</span>
+                            </span>
+                        </label>
+                        <label class="field stack">
+                            <span>Gift cost</span>
+                            <span class="control">
+                                <input id="giftCost" inputmode="decimal" autocomplete="off" spellcheck="false">
+                                <span class="suffix">TL</span>
+                            </span>
+                        </label>
+                        <label class="field stack">
+                            <span>Packaging cost</span>
+                            <span class="control">
+                                <input id="packagingCost" inputmode="decimal" autocomplete="off" spellcheck="false">
+                                <span class="suffix">TL</span>
+                            </span>
+                        </label>
+                        <label class="field stack">
+                            <span>Actual shipping cost</span>
+                            <span class="control">
+                                <input id="actualShipping" inputmode="decimal" autocomplete="off" spellcheck="false">
+                                <span class="suffix">TL</span>
+                            </span>
+                        </label>
+                        <label class="field stack wide">
+                            <span>Shipping the customer pays</span>
+                            <span class="control">
+                                <input id="customerShipping" inputmode="decimal" autocomplete="off" spellcheck="false">
+                                <span class="suffix">TL</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <p id="shippingNote" class="shipping-note" role="status" hidden></p>
+
+                    <div class="actions">
+                        <button id="savePackage" type="button" class="primary">Save this package</button>
+                        <button id="clearPackage" type="button" class="quiet">Clear package</button>
+                    </div>
+                    <p id="formStatus" class="form-status" role="status"></p>
+                </form>
+
+                <section id="results" class="screen is-waiting" aria-labelledby="result-title">
+                    <div class="screen-head">
+                        <div>
+                            <p class="index">3</p>
+                            <h2 id="result-title">Results</h2>
+                        </div>
+                        <p id="packageCaption">Choose a product type and whether the price includes VAT.</p>
+                    </div>
+
+                    <div class="answer">
+                        <div class="answer-cell net" id="netCell">
+                            <h3>Net profit</h3>
+                            <p id="netValue" class="figure">—</p>
+                            <p>Profit before tax − company tax</p>
+                        </div>
+                        <div class="answer-cell margin" id="marginCell">
+                            <h3>Margin</h3>
+                            <p id="marginValue" class="figure">—</p>
+                            <p>Net profit ÷ revenue excluding VAT × 100</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-grid">
+                        <article class="metric">
+                            <h3>Package price</h3>
+                            <p id="cardPrice" class="figure">—</p>
+                        </article>
+                        <article class="metric">
+                            <h3>Customer shipping</h3>
+                            <p id="cardShipping" class="figure">—</p>
+                        </article>
+                        <article class="metric">
+                            <h3>Amount the customer pays</h3>
+                            <p id="cardTotal" class="figure">—</p>
+                            <p id="cardTotalHow" class="caption">Package price + customer shipping, with VAT added when the price excludes it.</p>
+                        </article>
+                        <article class="metric">
+                            <h3>Direct costs</h3>
+                            <p id="cardCosts" class="figure">—</p>
+                            <p class="caption">Product + gift + packaging + actual shipping</p>
+                        </article>
+                    </div>
+
+                    <p id="shippingCover" class="shipping-cover" hidden></p>
+
+                    <div class="result-list">
+                        <div class="result">
+                            <div>
+                                <h3>VAT</h3>
+                                <p id="vatHow">If the price includes VAT: package price × VAT rate / (100 + VAT rate). If it does not: package price × VAT rate / 100. Shipping the customer pays is not taxed.</p>
+                            </div>
+                            <p id="vatValue" class="figure">—</p>
+                        </div>
+                        <div class="result">
+                            <div>
+                                <h3>Revenue excluding VAT</h3>
+                                <p>Amount the customer pays − VAT</p>
+                            </div>
+                            <p id="revenueValue" class="figure">—</p>
+                        </div>
+                        <div class="result">
+                            <div>
+                                <h3>Card fee</h3>
+                                <p id="cardFeeHow">Amount the customer pays × commission rate + fixed fee.</p>
+                            </div>
+                            <p id="cardFeeValue" class="figure">—</p>
+                        </div>
+                        <div class="result" id="beforeTaxRow">
+                            <div>
+                                <h3>Profit before tax</h3>
+                                <p>Revenue excluding VAT − direct costs − card fee</p>
+                            </div>
+                            <p id="beforeTaxValue" class="figure">—</p>
+                        </div>
+                        <div class="result">
+                            <div>
+                                <h3>Company tax</h3>
+                                <p id="taxHow">Profit before tax × tax rate, only when the profit is positive. A loss has zero tax.</p>
+                            </div>
+                            <p id="taxValue" class="figure">—</p>
+                        </div>
+                    </div>
+                    <p id="summary" class="summary">Net profit and margin appear once the package can be calculated.</p>
+                </section>
+            </div>
+
+            <section id="savedSection" class="panel saved" hidden>
+                <div class="panel-head">
+                    <div>
+                        <h2>Saved packages</h2>
+                    </div>
+                    <p>Reopen a package to compare margins. Stored in this browser only.</p>
+                </div>
+                <div id="savedList" class="saved-list"></div>
+            </section>
         </div>
-        <div class="settings-grid">
-          <label class="field" data-rate="games">
-            <span>KDV للألعاب</span>
-            <span class="control">
-              <input id="kdvGames" inputmode="decimal" autocomplete="off" />
-              <span class="suffix">%</span>
-            </span>
-          </label>
-          <label class="field" data-rate="stationery">
-            <span>KDV للقرطاسية</span>
-            <span class="control">
-              <input id="kdvStationery" inputmode="decimal" autocomplete="off" />
-              <span class="suffix">%</span>
-            </span>
-          </label>
-          <label class="field">
-            <span>عمولة iyzico</span>
-            <span class="control">
-              <input id="iyzicoRate" inputmode="decimal" autocomplete="off" />
-              <span class="suffix">%</span>
-            </span>
-          </label>
-          <label class="field">
-            <span>رسم iyzico لكل عملية</span>
-            <span class="control">
-              <input id="iyzicoFixed" inputmode="decimal" autocomplete="off" />
-              <span class="suffix">TL</span>
-            </span>
-          </label>
-          <label class="field">
-            <span>ضريبة الشركة التقديرية</span>
-            <span class="control">
-              <input id="companyTax" inputmode="decimal" autocomplete="off" />
-              <span class="suffix">%</span>
-            </span>
-          </label>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo logo--footer" aria-label="Technova Solutions — home">
+                        <img src="../logo.png" alt="" class="logo-img logo-img--footer" width="520" height="200" decoding="async">
+                    </a>
+                    <p>ERP systems, AI workflows, and modern software for operations-heavy businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../index.html#work">Work</a>
+                    <a href="../manufacturing-erp.html">ERP Offer</a>
+                    <a href="index.html" aria-current="page">Profit Calculator</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><span class="footer-est">Est. 2024</span> · © 2024–2026 Technova Solutions. All rights reserved.</p>
+                <p class="footer-legal"><a href="mailto:hello@technovasolutions.com">hello@technovasolutions.com</a></p>
+            </div>
         </div>
-        <p class="footnote">
-          قيم مبدئية للحساب. تأكد من النسبة الفعلية حسب نوع السلعة، وعقد iyzico، وما يعتمده المحاسب.
-        </p>
-      </section>
+    </footer>
 
-      <div class="workspace">
-        <section class="panel entry" aria-labelledby="entry-title">
-          <div class="panel-head">
-            <div>
-              <p class="index">٢</p>
-              <h2 id="entry-title">بيانات الباقة</h2>
-            </div>
-            <p>تدخلها لكل باقة تبيعها.</p>
-          </div>
-
-          <label class="field stack">
-            <span>اسم الباقة</span>
-            <input id="name" type="text" autocomplete="off" placeholder="باقة صلصال 1+2" />
-          </label>
-
-          <fieldset class="choice">
-            <legend>نوع المنتج</legend>
-            <label>
-              <input type="radio" name="productType" value="games" />
-              <span>ألعاب</span>
-            </label>
-            <label>
-              <input type="radio" name="productType" value="stationery" />
-              <span>قرطاسية</span>
-            </label>
-          </fieldset>
-
-          <label class="field stack">
-            <span>سعر الباقة</span>
-            <span class="control">
-              <input id="price" inputmode="decimal" autocomplete="off" />
-              <span class="suffix">TL</span>
-            </span>
-          </label>
-
-          <fieldset class="choice">
-            <legend>هل سعر الباقة شامل KDV؟</legend>
-            <label>
-              <input type="radio" name="priceIncludesKdv" value="yes" />
-              <span>نعم</span>
-            </label>
-            <label>
-              <input type="radio" name="priceIncludesKdv" value="no" />
-              <span>لا</span>
-            </label>
-          </fieldset>
-
-          <div class="cost-grid">
-            <label class="field stack">
-              <span>تكلفة المنتجات</span>
-              <span class="control">
-                <input id="productCost" inputmode="decimal" autocomplete="off" />
-                <span class="suffix">TL</span>
-              </span>
-            </label>
-            <label class="field stack">
-              <span>تكلفة الهدية</span>
-              <span class="control">
-                <input id="giftCost" inputmode="decimal" autocomplete="off" />
-                <span class="suffix">TL</span>
-              </span>
-            </label>
-            <label class="field stack">
-              <span>تكلفة التغليف</span>
-              <span class="control">
-                <input id="packagingCost" inputmode="decimal" autocomplete="off" />
-                <span class="suffix">TL</span>
-              </span>
-            </label>
-            <label class="field stack">
-              <span>الشحن الفعلي</span>
-              <span class="control">
-                <input id="actualShipping" inputmode="decimal" autocomplete="off" />
-                <span class="suffix">TL</span>
-              </span>
-            </label>
-            <label class="field stack wide">
-              <span>الشحن الذي يدفعه الزبون</span>
-              <span class="control">
-                <input id="customerShipping" inputmode="decimal" autocomplete="off" />
-                <span class="suffix">TL</span>
-              </span>
-            </label>
-          </div>
-
-          <p id="shippingNote" class="shipping-note" hidden></p>
-
-          <div class="actions">
-            <button id="savePackage" type="button">احفظ هذه الباقة</button>
-            <button id="resetExample" type="button" class="quiet">مثال باقة الصلصال</button>
-          </div>
-        </section>
-
-        <section class="screen" aria-labelledby="result-title">
-          <div class="screen-head">
-            <div>
-              <p class="index">٣</p>
-              <h2 id="result-title">Acbak Surprise — Profit Calculator</h2>
-            </div>
-            <p id="packageCaption"></p>
-          </div>
-
-          <div class="answer">
-            <div class="answer-cell net">
-              <h3>صافي الربح</h3>
-              <p id="netValue" class="figure" dir="ltr"></p>
-              <p>الربح قبل الضريبة − ضريبة الشركة</p>
-            </div>
-            <div class="answer-cell margin">
-              <h3>هامش الربح</h3>
-              <p id="marginValue" class="figure" dir="ltr"></p>
-              <p>صافي الربح ÷ الإيراد بدون KDV × 100</p>
-            </div>
-          </div>
-
-          <div class="metric-grid">
-            <article class="metric">
-              <h3>سعر الباقة</h3>
-              <p id="cardPrice" class="figure" dir="ltr"></p>
-              <span class="tag">متغير</span>
-            </article>
-            <article class="metric">
-              <h3>الشحن على الزبون</h3>
-              <p id="cardShipping" class="figure" dir="ltr"></p>
-              <span class="tag">متغير</span>
-            </article>
-            <article class="metric">
-              <h3>إجمالي الدفع</h3>
-              <p id="cardTotal" class="figure" dir="ltr"></p>
-              <span class="tag auto">تلقائي</span>
-            </article>
-            <article class="metric">
-              <h3>التكاليف المباشرة</h3>
-              <p id="cardCosts" class="figure" dir="ltr"></p>
-              <span class="tag auto">تلقائي</span>
-            </article>
-          </div>
-
-          <div class="result-list">
-            <div class="result">
-              <div>
-                <h3>KDV</h3>
-                <p id="kdvHow"></p>
-              </div>
-              <p id="kdvValue" class="figure" dir="ltr"></p>
-            </div>
-            <div class="result">
-              <div>
-                <h3>الإيراد بدون KDV</h3>
-                <p>مجموع الدفع − KDV</p>
-              </div>
-              <p id="revenueValue" class="figure" dir="ltr"></p>
-            </div>
-            <div class="result">
-              <div>
-                <h3>عمولة iyzico</h3>
-                <p>نسبة العمولة + الرسم الثابت، على مجموع الدفع</p>
-              </div>
-              <p id="commissionValue" class="figure" dir="ltr"></p>
-            </div>
-            <div class="result">
-              <div>
-                <h3>الربح قبل ضريبة الشركة</h3>
-                <p>الإيراد بدون KDV − التكاليف − العمولة</p>
-              </div>
-              <p id="beforeTaxValue" class="figure" dir="ltr"></p>
-            </div>
-            <div class="result">
-              <div>
-                <h3>ضريبة الشركة التقديرية</h3>
-                <p>الربح الموجب × نسبة الضريبة</p>
-              </div>
-              <p id="taxValue" class="figure" dir="ltr"></p>
-            </div>
-          </div>
-          <p id="summary" class="summary"></p>
-        </section>
-      </div>
-
-      <section id="savedSection" class="panel saved" hidden>
-        <div class="panel-head">
-          <div>
-            <h2>الباقات المحفوظة</h2>
-          </div>
-          <p>لمقارنة الهامش بين الباقات على هذا الجهاز.</p>
-        </div>
-        <div id="savedList" class="saved-list"></div>
-      </section>
-    </div>
+    <script src="../script.js"></script>
     <script src="calculator.js"></script>
     <script src="app.js"></script>
-  </body>
+</body>
 </html>

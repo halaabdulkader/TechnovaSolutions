@@ -1,97 +1,61 @@
-:root {
-  --bg: #090909;
-  --panel: #101010;
-  --card: #161616;
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.18);
-  --text: #f4f1ea;
-  --muted: #9c978e;
-  --faint: #6e6a63;
-  --gold: #e4c17a;
-  --loss: #e3a093;
-  --focus: #e4c17a;
-  color-scheme: dark;
+.calc-main {
+  padding: clamp(120px, 16vh, 156px) 0 clamp(64px, 8vw, 96px);
 }
 
-* {
-  box-sizing: border-box;
+.calc-intro {
+  max-width: 40rem;
+  margin-bottom: 28px;
 }
 
-html {
-  background: var(--bg);
+.calc-intro h1 {
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 12px 0 14px;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  font-family: "IBM Plex Sans Arabic", "Geeza Pro", "Noto Naskh Arabic", Tahoma, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+.calc-intro p {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
-button,
-input {
+.calc-wrap {
+  --loss: #ff8b78;
+  --faint: var(--color-text-dim);
+}
+
+.calc-wrap [hidden] {
+  display: none !important;
+}
+
+.calc-wrap button,
+.calc-wrap input {
   font: inherit;
   color: inherit;
 }
 
-button {
+.calc-wrap button {
   cursor: pointer;
 }
 
-button:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-}
-
-.page {
-  width: min(1120px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 40px 0 72px;
-}
-
-.masthead {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 32px;
-  margin-bottom: 28px;
-}
-
-.brand {
-  margin: 0 0 4px;
-  color: var(--gold);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-h1,
-h2,
-h3,
-p {
+.calc-wrap h2,
+.calc-wrap h3,
+.calc-wrap p {
   margin: 0;
 }
 
-h1 {
-  font-size: 40px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-.lede {
-  max-width: 420px;
-  color: var(--muted);
-  font-size: 15px;
+#package-entry,
+#results,
+#savedSection {
+  scroll-margin-top: 110px;
 }
 
 .panel,
 .screen {
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
   border-radius: 20px;
 }
 
@@ -111,7 +75,7 @@ h1 {
 
 .panel-head h2,
 .screen-head h2 {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
 }
 
@@ -120,9 +84,13 @@ h1 {
 .footnote,
 .result p,
 .summary,
-.shipping-note {
-  color: var(--muted);
+.shipping-note,
+.shipping-cover,
+.metric .caption,
+.form-status {
+  color: var(--color-text-muted);
   font-size: 13px;
+  line-height: 1.45;
 }
 
 .panel-head > div,
@@ -136,6 +104,7 @@ h1 {
   color: var(--faint);
   font-size: 13px;
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .settings-grid,
@@ -159,7 +128,7 @@ h1 {
 
 .field > span:first-child,
 .choice legend {
-  color: var(--muted);
+  color: var(--color-text-muted);
   font-size: 13px;
 }
 
@@ -170,27 +139,26 @@ h1 {
   gap: 8px;
   min-height: 48px;
   padding: 0 12px;
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
-  direction: ltr;
 }
 
 .control:focus-within,
 .field.stack > input:focus {
-  border-color: var(--focus);
+  border-color: var(--color-primary);
 }
 
 .field.stack > input {
   width: 100%;
   min-height: 48px;
   padding: 0 12px;
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
 }
 
-input {
+.calc-wrap input {
   width: 100%;
   padding: 0;
   background: transparent;
@@ -211,7 +179,7 @@ input {
 }
 
 .field[data-active="true"] .control {
-  border-color: rgba(228, 193, 122, 0.55);
+  border-color: rgba(212, 175, 55, 0.7);
 }
 
 .footnote {
@@ -220,66 +188,87 @@ input {
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.15fr);
   gap: 18px;
   align-items: start;
 }
 
-.entry {
+.entry,
+.screen,
+.saved {
   padding: 22px;
 }
 
 .choice {
+  width: 100%;
+  min-width: 0;
   margin: 14px 0 0;
   padding: 0;
   border: 0;
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
-  align-items: center;
 }
 
 .choice legend {
+  grid-column: 1 / -1;
   padding: 0;
 }
 
 .choice label {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  background: var(--card);
-  border: 1px solid var(--line);
+  padding: 8px 12px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
-  color: var(--muted);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  text-align: center;
 }
 
 .choice input {
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .choice label:has(input:checked) {
-  border-color: var(--line-strong);
-  color: var(--text);
-  background: #1d1d1d;
+  border-color: rgba(212, 175, 55, 0.7);
+  color: var(--color-text);
+  background: rgba(212, 175, 55, 0.08);
 }
 
 .choice label:has(input:focus-visible) {
-  border-color: var(--focus);
+  border-color: var(--color-primary);
 }
 
 .wide {
   grid-column: 1 / -1;
 }
 
-.shipping-note {
+.shipping-note,
+.shipping-cover {
   margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--color-text);
 }
 
 .actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
 }
@@ -288,20 +277,47 @@ input {
   min-height: 46px;
   padding: 0 16px;
   border-radius: 12px;
-  border: 1px solid var(--line-strong);
-  background: var(--text);
-  color: #16140f;
+}
+
+.actions .primary {
+  background: var(--color-primary);
+  color: #0a0a0a;
+  border: 1px solid transparent;
   font-weight: 600;
+}
+
+.actions .primary:hover {
+  background: var(--color-primary-light);
 }
 
 .actions .quiet {
   background: transparent;
-  color: var(--text);
+  color: var(--color-text);
+  border: 1px solid rgba(212, 175, 55, 0.35);
   font-weight: 500;
 }
 
-.screen {
-  padding: 22px;
+.actions .quiet:hover {
+  color: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.form-status {
+  min-height: 0;
+  margin-top: 10px;
+  color: var(--color-text);
+}
+
+.form-status:empty {
+  display: none;
+}
+
+.form-status.is-saved {
+  color: var(--color-primary-light);
+}
+
+.screen.is-waiting .figure {
+  color: var(--color-text-dim);
 }
 
 .answer {
@@ -313,15 +329,23 @@ input {
 
 .answer-cell {
   padding: 14px 16px 12px;
-  border: 1px solid rgba(228, 193, 122, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: 16px;
   background: #17140e;
 }
 
+.answer-cell h3,
+.metric h3,
+.result h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
 .answer-cell .figure {
   margin: 4px 0;
-  color: var(--gold);
-  font-size: 36px;
+  color: var(--color-primary-light);
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
 }
 
 .answer-cell p:last-child {
@@ -338,42 +362,29 @@ input {
 .metric {
   min-height: 132px;
   padding: 16px;
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.metric h3,
-.result h3 {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted);
-}
-
 .figure {
   margin-top: auto;
-  font-size: 32px;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
   line-height: 1.15;
 }
 
-.tag {
+.metric .caption {
   margin-top: 6px;
-  color: var(--faint);
-  font-size: 12px;
-}
-
-.tag.auto {
-  color: #b7c4b4;
 }
 
 .result-list {
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .result {
@@ -382,36 +393,42 @@ input {
   align-items: center;
   gap: 16px;
   padding: 14px 2px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
+}
+
+.result > div {
+  min-width: 0;
 }
 
 .result .figure {
   margin-top: 0;
-  font-size: 22px;
+  font-size: 1.375rem;
   white-space: nowrap;
 }
 
 .answer-cell.loss,
-.result.loss,
-.metric.loss {
-  border-color: rgba(227, 160, 147, 0.45);
+.result.loss {
+  border-color: rgba(255, 139, 120, 0.5);
 }
 
 .answer-cell.loss .figure,
 .result.loss .figure,
-.metric.loss .figure {
+.saved-row b.loss {
   color: var(--loss);
 }
 
 .summary {
   margin-top: 8px;
   padding-top: 14px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border);
+}
+
+.summary.loss {
+  color: var(--loss);
 }
 
 .saved {
   margin-top: 18px;
-  padding: 22px;
 }
 
 .saved-list {
@@ -421,15 +438,19 @@ input {
 
 .saved-row {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(90px, 0.7fr)) auto;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(88px, 0.7fr)) auto;
   gap: 12px;
   align-items: center;
   width: 100%;
   padding: 12px;
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  text-align: right;
+  text-align: left;
+}
+
+.saved-row.is-open {
+  border-color: rgba(212, 175, 55, 0.7);
 }
 
 .saved-row strong {
@@ -440,7 +461,7 @@ input {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  color: var(--muted);
+  color: var(--color-text-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -450,64 +471,60 @@ input {
 }
 
 .saved-row b {
-  color: var(--text);
+  color: var(--color-text);
   font-weight: 600;
 }
 
 .saved-row .open {
-  color: var(--text);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.saved-row .open strong {
+  display: block;
+  overflow-wrap: anywhere;
 }
 
 .saved-row button.danger {
+  min-height: 44px;
   padding: 8px 10px;
   background: transparent;
   border: 0;
-  color: var(--muted);
+  color: var(--color-text-muted);
 }
 
 .saved-row button.danger:hover,
-.actions .quiet:hover,
 .saved-row .open:hover {
-  color: var(--gold);
+  color: var(--color-primary-light);
+}
+
+@media (min-width: 981px) {
+  .screen {
+    position: sticky;
+    top: 108px;
+  }
 }
 
 @media (max-width: 980px) {
-  .masthead,
-  .workspace,
-  .settings-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
   .panel-head,
   .screen-head {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .lede {
-    max-width: none;
+  .workspace {
+    grid-template-columns: 1fr;
   }
 
-  h1 {
-    font-size: 32px;
+  .settings-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 640px) {
-  .page {
-    width: min(100% - 20px, 1120px);
-    padding-top: 24px;
-  }
-
-  .choice {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .choice legend {
-    grid-column: 1 / -1;
-  }
-
   .cost-grid,
   .metric-grid,
   .answer,
@@ -515,11 +532,21 @@ input {
     grid-template-columns: 1fr 1fr;
   }
 
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
   .saved-row .name-cell {
     grid-column: 1 / -1;
   }
 
   .figure {
-    font-size: 26px;
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .answer {
+    grid-template-columns: 1fr;
   }
 }
