@@ -300,7 +300,7 @@ function initContactForm() {
 }
 
 function subscribeMailto(data) {
-    const subject = 'What to charge — Technova Solutions';
+    const subject = 'Price Right — Technova Solutions';
     const body = [
         `Name: ${data.name}`,
         `Email: ${data.email}`,
@@ -343,7 +343,7 @@ function initSubscribeForm() {
             company: data.company || '—',
             plan: data.plan,
             catalog: data.catalog,
-            _subject: `What to charge — ${data.plan}`,
+            _subject: `Price Right — ${data.plan}`,
             _template: 'table',
             _captcha: false
         };
@@ -390,7 +390,7 @@ function initSubscribeForm() {
 }
 
 function pricingMailtoLink(data) {
-    const subject = 'What to charge — Technova Solutions';
+    const subject = 'Price Right — Technova Solutions';
     const body = [
         `Name: ${data.name}`,
         `Email: ${data.email}`,
@@ -461,7 +461,7 @@ function initPricingRequest() {
             'company-tax': data.tax || '—',
             'target-margin': data.margin || '—',
             note: data.note || '—',
-            _subject: `What to charge — ${data.item || data.name}`,
+            _subject: `Price Right — ${data.item || data.name}`,
             _template: 'table',
             _captcha: false
         };

@@ -512,12 +512,9 @@ ul, ol {
    HERO SECTION
    ======================================== */
 .hero {
-    min-height: auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: clamp(40px, 5vw, 96px);
-    padding: clamp(150px, 18vh, 200px) var(--container-pad-x) clamp(64px, 8vw, 100px);
+    min-height: 0;
+    display: block;
+    padding: 108px var(--container-pad-x) 0;
     max-width: var(--container-max);
     margin: 0 auto;
     position: relative;
@@ -1105,6 +1102,11 @@ section {
    ======================================== */
 .services {
     background: var(--color-bg);
+    padding-top: 36px;
+}
+
+.services .section-header {
+    margin-bottom: 28px;
 }
 
 .services-grid {
@@ -2277,10 +2279,8 @@ a.contact-email:hover {
     }
     
     .hero {
-        grid-template-columns: 1fr;
         text-align: center;
-        padding-top: clamp(135px, 17vh, 175px);
-        gap: clamp(32px, 6vw, 48px);
+        padding-top: 96px;
     }
 
     .hero-visual {
@@ -2440,7 +2440,7 @@ a.contact-email:hover {
     }
 
     .hero {
-        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+        padding-top: 112px;
     }
 }
 
@@ -2455,15 +2455,70 @@ a.contact-email:hover {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        padding-top: 76px;
+    }
+
+    .hero-badge {
+        margin-bottom: 12px;
+    }
+
+    .hero-title {
+        font-size: 2.15rem;
+        margin-bottom: 0.55rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.45;
+    }
+
+    .services {
+        padding-top: 12px;
+    }
+
+    .services .section-tag {
+        margin-bottom: 8px;
+    }
+
+    .services .section-title {
+        margin-bottom: 6px;
+        font-size: 1.65rem;
+    }
+
+    .services-grid {
+        gap: 12px;
+    }
+
     .portfolio-grid {
         grid-template-columns: 1fr;
         max-width: 560px;
         margin: 0 auto;
     }
 
-    .service-extra {
-        flex-direction: column;
-        align-items: flex-start;
+    .service-features {
+        display: none;
+    }
+
+    .service-card {
+        padding: 14px 16px 12px;
+    }
+
+    .service-card > p {
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .service-card .btn {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+
+    .services .section-header {
+        margin-bottom: 16px;
     }
 
     .portfolio-body {
