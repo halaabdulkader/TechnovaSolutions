@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technova Solutions — ERP systems, AI-powered workflows, and modern web software for operations-heavy businesses. Built for planning, production, and real work.">
+    <meta name="description" data-i18n="meta.homeDesc" content="Technova Solutions — ERP systems, AI-powered workflows, and modern web software for operations-heavy businesses. Built for planning, production, and real work.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="canonical" href="https://technovasolutions.com/">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://technovasolutions.com/sitemap.xml">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="favicon.svg">
-    <title>Technova Solutions | ERP Systems & AI Software</title>
+    <title data-i18n="meta.homeTitle">Technova Solutions | ERP Systems & AI Software</title>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://technovasolutions.com/">
     <meta property="og:title" content="Technova Solutions | ERP Systems & AI Software">
@@ -35,19 +35,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
     <!-- Navigation -->
-    <nav class="navbar" aria-label="Primary">
+    <nav class="navbar" data-i18n-aria="a11y.nav" aria-label="Primary">
         <div class="nav-container">
-            <a href="index.html" class="logo logo--nav" aria-label="Technova Solutions — home">
+            <a href="index.html" class="logo logo--nav" data-i18n-aria="a11y.home" aria-label="Technova Solutions — home">
                 <img src="logo.png" alt="" class="logo-img" width="440" height="132" decoding="async" fetchpriority="high">
             </a>
             <ul id="site-nav" class="nav-links">
-                <li><a href="#erp">ERP</a></li>
-                <li><a href="#websites">Websites</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#contact" class="nav-cta">Talk to Us</a></li>
+                <li><a href="#erp" data-i18n="nav.erp">ERP</a></li>
+                <li><a href="#websites" data-i18n="nav.websites">Websites</a></li>
+                <li><a href="#work" data-i18n="nav.work">Work</a></li>
+                <li><a href="#contact" class="nav-cta" data-i18n="nav.talk">Talk to Us</a></li>
             </ul>
+            <div class="lang-switch" role="group" data-i18n-aria="a11y.language" aria-label="Language">
+                <button type="button" class="lang-switch-btn" data-set-lang="en" lang="en">EN</button>
+                <button type="button" class="lang-switch-btn" data-set-lang="tr" lang="tr">TR</button>
+            </div>
             <button type="button" class="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
                 <span></span>
                 <span></span>
@@ -67,28 +71,28 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                ERP · Websites · Item pricing
+                <span data-i18n="hero.badge">ERP · Websites · Item pricing</span>
             </div>
             <h1 class="hero-title">
-                What do you<br>
-                <span class="gradient-text">need built?</span>
+                <span data-i18n="hero.l1">What do you</span><br>
+                <span class="gradient-text" data-i18n="hero.l2">need built?</span>
             </h1>
-            <p class="hero-subtitle">
+            <p class="hero-subtitle" data-i18n="hero.sub">
                 Pick the service you came for. ERP for the operation, a website for the brand, or a price that holds the margin.
             </p>
         </div>
-        <nav class="hero-paths" aria-label="Choose a service">
+        <nav class="hero-paths" data-i18n-aria="a11y.choose" aria-label="Choose a service">
             <a class="hero-path" href="#erp">
-                <strong>ERP systems</strong>
-                <span>Orders, planning, production, and warehouse.</span>
+                <strong data-i18n="path.erp.t">ERP systems</strong>
+                <span data-i18n="path.erp.d">Orders, planning, production, and warehouse.</span>
             </a>
             <a class="hero-path" href="#websites">
-                <strong>Websites</strong>
-                <span>A clear site for your company or shop.</span>
+                <strong data-i18n="path.web.t">Websites</strong>
+                <span data-i18n="path.web.d">A clear site for your company or shop.</span>
             </a>
             <a class="hero-path" href="profit-calculator/index.html">
-                <strong>Item pricing</strong>
-                <span>A short demo, then subscribe with us.</span>
+                <strong data-i18n="path.price.t">Item pricing</strong>
+                <span data-i18n="path.price.d">A short demo, then subscribe with us.</span>
             </a>
         </nav>
     </header>
@@ -96,43 +100,43 @@
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Services</span>
-                <h2 class="section-title">Three ways to start</h2>
-                <p class="section-desc">Each service has one next step. Open the one that matches what you need.</p>
+                <span class="section-tag" data-i18n="svc.tag">Services</span>
+                <h2 class="section-title" data-i18n="svc.title">Three ways to start</h2>
+                <p class="section-desc" data-i18n="svc.desc">Each service has one next step. Open the one that matches what you need.</p>
             </div>
             <div class="services-grid">
                 <article id="erp" class="service-card">
-                    <h3>ERP systems</h3>
-                    <p>One system for orders, planning, production, warehouse, and purchases. AI can sit inside that work when it saves time.</p>
+                    <h3 data-i18n="path.erp.t">ERP systems</h3>
+                    <p data-i18n="svc.erp.p">One system for orders, planning, production, warehouse, and purchases. AI can sit inside that work when it saves time.</p>
                     <ul class="service-features">
-                        <li>Order-to-ship workflows</li>
-                        <li>Planning and production</li>
-                        <li>Stock, purchases, shipments</li>
-                        <li>Roles and an audit trail</li>
+                        <li data-i18n="svc.erp.1">Order-to-ship workflows</li>
+                        <li data-i18n="svc.erp.2">Planning and production</li>
+                        <li data-i18n="svc.erp.3">Stock, purchases, shipments</li>
+                        <li data-i18n="svc.erp.4">Roles and an audit trail</li>
                     </ul>
-                    <a href="manufacturing-erp.html" class="btn btn-primary">See the ERP offer</a>
+                    <a href="manufacturing-erp.html" class="btn btn-primary" data-i18n="svc.erp.cta">See the ERP offer</a>
                 </article>
                 <article id="websites" class="service-card">
-                    <h3>Websites</h3>
-                    <p>A company site or an online shop. Fixed packages when the scope is clear, and a custom quote when it is not.</p>
+                    <h3 data-i18n="path.web.t">Websites</h3>
+                    <p data-i18n="svc.web.p">A company site or an online shop. Fixed packages when the scope is clear, and a custom quote when it is not.</p>
                     <ul class="service-features">
-                        <li>Company and product sites</li>
-                        <li>Online shops</li>
-                        <li>Fast on phones</li>
-                        <li>Clear packages below</li>
+                        <li data-i18n="svc.web.1">Company and product sites</li>
+                        <li data-i18n="svc.web.2">Online shops</li>
+                        <li data-i18n="svc.web.3">Fast on phones</li>
+                        <li data-i18n="svc.web.4">Clear packages below</li>
                     </ul>
-                    <a href="#pricing" class="btn btn-primary" data-prefill="website">See website packages</a>
+                    <a href="#pricing" class="btn btn-primary" data-prefill="website" data-i18n="svc.web.cta">See website packages</a>
                 </article>
                 <article id="item-pricing" class="service-card">
-                    <h3>Item pricing</h3>
-                    <p>A Technova subscription. We set each selling price so the margin holds after VAT, card fees, shipping, and tax.</p>
+                    <h3 data-i18n="path.price.t">Item pricing</h3>
+                    <p data-i18n="svc.price.p">A Technova subscription. We set each selling price so the margin holds after VAT, card fees, shipping, and tax.</p>
                     <ul class="service-features">
-                        <li>See a small demo first</li>
-                        <li>Your rates, your catalog</li>
-                        <li>Prices that keep the margin</li>
-                        <li>Contact us to subscribe</li>
+                        <li data-i18n="svc.price.1">See a small demo first</li>
+                        <li data-i18n="svc.price.2">Your rates, your catalog</li>
+                        <li data-i18n="svc.price.3">Prices that keep the margin</li>
+                        <li data-i18n="svc.price.4">Contact us to subscribe</li>
                     </ul>
-                    <a href="profit-calculator/index.html" class="btn btn-primary">See the demo</a>
+                    <a href="profit-calculator/index.html" class="btn btn-primary" data-i18n="svc.price.cta">See the demo</a>
                 </article>
             </div>
         </div>
@@ -142,50 +146,50 @@
     <section id="work" class="work">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Selected Work</span>
-                <h2 class="section-title">Work you can open</h2>
-                <p class="section-desc">An ERP for the factory floor, and websites for brands and shops.</p>
+                <span class="section-tag" data-i18n="work.tag">Selected Work</span>
+                <h2 class="section-title" data-i18n="work.title">Work you can open</h2>
+                <p class="section-desc" data-i18n="work.desc">An ERP for the factory floor, and websites for brands and shops.</p>
             </div>
 
             <div class="work-featured">
                 <div class="work-layout">
                     <div class="work-copy">
-                        <p class="work-kicker">ERP · In progress</p>
+                        <p class="work-kicker" data-i18n="work.kicker">ERP · In progress</p>
                         <h3 class="work-name">Temberz ERP</h3>
-                        <p class="work-lead">A manufacturing-oriented ERP spanning orders, planning, production, warehouse, and purchases—with AI room in the workflow. One spine for the factory floor and the office.</p>
+                        <p class="work-lead" data-i18n="work.lead">A manufacturing-oriented ERP spanning orders, planning, production, warehouse, and purchases—with AI room in the workflow. One spine for the factory floor and the office.</p>
                         <ul class="work-modules">
-                            <li>Orders &amp; customers</li>
-                            <li>Planning schedules</li>
-                            <li>Production jobs</li>
-                            <li>Warehouse &amp; materials</li>
-                            <li>Purchases &amp; shipments</li>
-                            <li>Roles, permissions, audit</li>
+                            <li data-i18n="work.m1">Orders &amp; customers</li>
+                            <li data-i18n="work.m2">Planning schedules</li>
+                            <li data-i18n="work.m3">Production jobs</li>
+                            <li data-i18n="work.m4">Warehouse &amp; materials</li>
+                            <li data-i18n="work.m5">Purchases &amp; shipments</li>
+                            <li data-i18n="work.m6">Roles, permissions, audit</li>
                         </ul>
                         <div class="work-actions">
-                            <a href="manufacturing-erp.html" class="btn btn-primary">See the starter offer</a>
-                            <a href="#contact" class="btn btn-secondary" data-prefill="erp">Discuss a similar build</a>
+                            <a href="manufacturing-erp.html" class="btn btn-primary" data-i18n="work.offer">See the starter offer</a>
+                            <a href="#contact" class="btn btn-secondary" data-prefill="erp" data-i18n="work.discuss">Discuss a similar build</a>
                         </div>
                     </div>
                     <div class="work-visual" aria-hidden="true">
                         <div class="app-shell">
                             <aside class="app-shell-nav">
                                 <span class="app-shell-brand">Temberz</span>
-                                <span class="is-active">Planning</span>
-                                <span>Orders</span>
-                                <span>Production</span>
-                                <span>Warehouse</span>
-                                <span>Purchases</span>
+                                <span class="is-active" data-i18n="mock.planning">Planning</span>
+                                <span data-i18n="mock.orders">Orders</span>
+                                <span data-i18n="mock.production">Production</span>
+                                <span data-i18n="mock.warehouse">Warehouse</span>
+                                <span data-i18n="mock.purchases">Purchases</span>
                             </aside>
                             <div class="app-shell-main">
                                 <div class="app-shell-bar">
-                                    <span>Week schedule</span>
-                                    <span class="app-shell-ai">AI assist</span>
+                                    <span data-i18n="mock.week">Week schedule</span>
+                                    <span class="app-shell-ai" data-i18n="mock.ai">AI assist</span>
                                 </div>
                                 <div class="app-shell-board">
-                                    <div class="app-shell-row"><span>Line A · Jacket run</span><span>Day 2–4</span></div>
-                                    <div class="app-shell-row"><span>Line B · Softwear</span><span>Day 3–5</span></div>
-                                    <div class="app-shell-row highlight"><span>Material check</span><span>Stock OK</span></div>
-                                    <div class="app-shell-row"><span>Ship window</span><span>Fri</span></div>
+                                    <div class="app-shell-row"><span data-i18n="mock.lineA">Line A · Jacket run</span><span data-i18n="mock.day24">Day 2–4</span></div>
+                                    <div class="app-shell-row"><span data-i18n="mock.lineB">Line B · Softwear</span><span data-i18n="mock.day35">Day 3–5</span></div>
+                                    <div class="app-shell-row highlight"><span data-i18n="mock.material">Material check</span><span data-i18n="mock.stock">Stock OK</span></div>
+                                    <div class="app-shell-row"><span data-i18n="mock.ship">Ship window</span><span data-i18n="mock.fri">Fri</span></div>
                                 </div>
                             </div>
                         </div>
@@ -194,39 +198,39 @@
             </div>
 
             <div class="portfolio">
-                <h3 class="portfolio-heading">Websites</h3>
+                <h3 class="portfolio-heading" data-i18n="port.heading">Websites</h3>
                 <div class="portfolio-grid">
                     <article class="portfolio-project">
                         <a class="portfolio-media" href="https://ekintextile.com" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/ekin-textile.jpg" alt="Ekin Textile — creative textile manufacturing" width="1600" height="900" loading="lazy" decoding="async">
+                            <img src="assets/ekin-textile.jpg" data-i18n-alt="port.ekin.alt" alt="Ekin Textile — creative textile manufacturing" width="1600" height="900" loading="lazy" decoding="async">
                         </a>
                         <div class="portfolio-body">
-                            <p class="work-kicker">Website · Textile</p>
+                            <p class="work-kicker" data-i18n="port.ekin.k">Website · Textile</p>
                             <h4 class="portfolio-title">Ekin Textile</h4>
-                            <p class="portfolio-desc">Brand site for a creative textile factory—clean, product-forward presence that brings client visions into focus.</p>
-                            <a class="portfolio-link" href="https://ekintextile.com" target="_blank" rel="noopener noreferrer">Visit ekintextile.com</a>
+                            <p class="portfolio-desc" data-i18n="port.ekin.d">Brand site for a creative textile factory—clean, product-forward presence that brings client visions into focus.</p>
+                            <a class="portfolio-link" href="https://ekintextile.com" target="_blank" rel="noopener noreferrer" data-i18n="port.ekin.a">Visit ekintextile.com</a>
                         </div>
                     </article>
                     <article class="portfolio-project">
                         <a class="portfolio-media" href="https://evrimtextile.com" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/evrim-textile.jpg" alt="Evrim Textile — industrial textile manufacturing" width="1600" height="900" loading="lazy" decoding="async">
+                            <img src="assets/evrim-textile.jpg" data-i18n-alt="port.evrim.alt" alt="Evrim Textile — industrial textile manufacturing" width="1600" height="900" loading="lazy" decoding="async">
                         </a>
                         <div class="portfolio-body">
-                            <p class="work-kicker">Website · Manufacturing</p>
+                            <p class="work-kicker" data-i18n="port.evrim.k">Website · Manufacturing</p>
                             <h4 class="portfolio-title">Evrim Textile</h4>
-                            <p class="portfolio-desc">Industrial textile manufacturer site with a clear hero, strong factory imagery, and a direct path to contact.</p>
-                            <a class="portfolio-link" href="https://evrimtextile.com" target="_blank" rel="noopener noreferrer">Visit evrimtextile.com</a>
+                            <p class="portfolio-desc" data-i18n="port.evrim.d">Industrial textile manufacturer site with a clear hero, strong factory imagery, and a direct path to contact.</p>
+                            <a class="portfolio-link" href="https://evrimtextile.com" target="_blank" rel="noopener noreferrer" data-i18n="port.evrim.a">Visit evrimtextile.com</a>
                         </div>
                     </article>
                     <article class="portfolio-project">
                         <a class="portfolio-media" href="https://acbaksurpriz.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/acbak-surpriz.jpg" alt="AçBak Sürpriz — kids game shop" width="1440" height="900" loading="lazy" decoding="async">
+                            <img src="assets/acbak-surpriz.jpg" data-i18n-alt="port.acbak.alt" alt="AçBak Sürpriz — kids game shop" width="1440" height="900" loading="lazy" decoding="async">
                         </a>
                         <div class="portfolio-body">
-                            <p class="work-kicker">Website · Kids shop</p>
+                            <p class="work-kicker" data-i18n="port.acbak.k">Website · Kids shop</p>
                             <h4 class="portfolio-title">AçBak Sürpriz</h4>
-                            <p class="portfolio-desc">Online shop for children's games in Turkey — surprise boxes, creative play, and a straight path from browse to cart.</p>
-                            <a class="portfolio-link" href="https://acbaksurpriz.com/" target="_blank" rel="noopener noreferrer">Visit acbaksurpriz.com</a>
+                            <p class="portfolio-desc" data-i18n="port.acbak.d">Online shop for children's games in Turkey — surprise boxes, creative play, and a straight path from browse to cart.</p>
+                            <a class="portfolio-link" href="https://acbaksurpriz.com/" target="_blank" rel="noopener noreferrer" data-i18n="port.acbak.a">Visit acbaksurpriz.com</a>
                         </div>
                     </article>
                 </div>
@@ -238,85 +242,85 @@
     <section id="pricing" class="pricing">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Websites</span>
-                <h2 class="section-title">Website packages</h2>
-                <p class="section-desc">A fixed price when you want a site. ERP and item pricing are quoted from the work itself.</p>
+                <span class="section-tag" data-i18n="pack.tag">Websites</span>
+                <h2 class="section-title" data-i18n="pack.title">Website packages</h2>
+                <p class="section-desc" data-i18n="pack.desc">A fixed price when you want a site. ERP and item pricing are quoted from the work itself.</p>
             </div>
 
             <div class="pricing-custom">
                 <div class="pricing-custom-copy">
-                    <h3>Need something larger?</h3>
-                    <p>ERP, a bigger shop, or item pricing for a catalog. Tell us the work and we quote a fixed plan.</p>
+                    <h3 data-i18n="pack.more.t">Need something larger?</h3>
+                    <p data-i18n="pack.more.p">ERP, a bigger shop, or item pricing for a catalog. Tell us the work and we quote a fixed plan.</p>
                 </div>
-                <a href="#contact" class="btn btn-primary" data-prefill="erp">Talk to us</a>
+                <a href="#contact" class="btn btn-primary" data-prefill="erp" data-i18n="pack.more.cta">Talk to us</a>
             </div>
 
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Starter Site</h3>
+                        <h3 data-i18n="pack.starter">Starter Site</h3>
                         <div class="price">
                             <span class="currency">$</span>
                             <span class="amount">499</span>
                         </div>
-                        <p class="price-desc">Small business presence online</p>
+                        <p class="price-desc" data-i18n="pack.starter.d">Small business presence online</p>
                     </div>
                     <ul class="pricing-features">
-                        <li><span class="check">✓</span> 1-5 pages</li>
-                        <li><span class="check">✓</span> Responsive design</li>
-                        <li><span class="check">✓</span> Contact form</li>
-                        <li><span class="check">✓</span> Basic SEO setup</li>
-                        <li><span class="check">✓</span> SSL certificate</li>
-                        <li><span class="check">✓</span> 2 weeks delivery</li>
-                        <li><span class="check">✓</span> 1 round of revisions</li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.s1">1-5 pages</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.s2">Responsive design</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.s3">Contact form</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.s4">Basic SEO setup</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.s5">SSL certificate</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.s6">2 weeks delivery</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.s7">1 round of revisions</span></li>
                     </ul>
-                    <a href="#contact" class="btn btn-secondary btn-full" data-prefill="website" data-budget="site-starter">Get Started</a>
+                    <a href="#contact" class="btn btn-secondary btn-full" data-prefill="website" data-budget="site-starter" data-i18n="pack.start">Get Started</a>
                 </div>
                 <div class="pricing-card popular">
-                    <div class="popular-badge">Most Popular</div>
+                    <div class="popular-badge" data-i18n="pack.popular">Most Popular</div>
                     <div class="pricing-header">
-                        <h3>Professional Site</h3>
+                        <h3 data-i18n="pack.pro">Professional Site</h3>
                         <div class="price">
                             <span class="currency">$</span>
                             <span class="amount">999</span>
                         </div>
-                        <p class="price-desc">Growing brands that need more depth</p>
+                        <p class="price-desc" data-i18n="pack.pro.d">Growing brands that need more depth</p>
                     </div>
                     <ul class="pricing-features">
-                        <li><span class="check">✓</span> 5-10 pages</li>
-                        <li><span class="check">✓</span> Custom design</li>
-                        <li><span class="check">✓</span> Contact + quote forms</li>
-                        <li><span class="check">✓</span> Advanced SEO</li>
-                        <li><span class="check">✓</span> Analytics setup</li>
-                        <li><span class="check">✓</span> 3 weeks delivery</li>
-                        <li><span class="check">✓</span> 3 rounds of revisions</li>
-                        <li><span class="check">✓</span> Social media integration</li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p1">5-10 pages</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p2">Custom design</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p3">Contact + quote forms</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p4">Advanced SEO</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p5">Analytics setup</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p6">3 weeks delivery</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p7">3 rounds of revisions</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.p8">Social media integration</span></li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary btn-full" data-prefill="website" data-budget="site-pro">Get Started</a>
+                    <a href="#contact" class="btn btn-primary btn-full" data-prefill="website" data-budget="site-pro" data-i18n="pack.start">Get Started</a>
                 </div>
                 <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Business Site</h3>
+                        <h3 data-i18n="pack.biz">Business Site</h3>
                         <div class="price">
                             <span class="currency">$</span>
                             <span class="amount">1,999</span>
                         </div>
-                        <p class="price-desc">Full-featured sites for established companies</p>
+                        <p class="price-desc" data-i18n="pack.biz.d">Full-featured sites for established companies</p>
                     </div>
                     <ul class="pricing-features">
-                        <li><span class="check">✓</span> 10-20 pages</li>
-                        <li><span class="check">✓</span> Premium custom design</li>
-                        <li><span class="check">✓</span> Multiple form types</li>
-                        <li><span class="check">✓</span> Full SEO optimization</li>
-                        <li><span class="check">✓</span> Blog/news section</li>
-                        <li><span class="check">✓</span> 4 weeks delivery</li>
-                        <li><span class="check">✓</span> Unlimited revisions</li>
-                        <li><span class="check">✓</span> Priority support</li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b1">10-20 pages</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b2">Premium custom design</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b3">Multiple form types</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b4">Full SEO optimization</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b5">Blog/news section</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b6">4 weeks delivery</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b7">Unlimited revisions</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="pack.b8">Priority support</span></li>
                     </ul>
-                    <a href="#contact" class="btn btn-secondary btn-full" data-prefill="website" data-budget="site-biz">Get Started</a>
+                    <a href="#contact" class="btn btn-secondary btn-full" data-prefill="website" data-budget="site-biz" data-i18n="pack.start">Get Started</a>
                 </div>
             </div>
-            <p class="pricing-note">These prices are for websites. <a href="#erp">ERP</a> and <a href="profit-calculator/index.html">item pricing</a> start from a conversation.</p>
+            <p class="pricing-note"><span data-i18n="pack.note1">These prices are for websites.</span> <a href="#erp">ERP</a> <span data-i18n="pack.note2">and</span> <a href="profit-calculator/index.html" data-i18n="nav.pricing">item pricing</a> <span data-i18n="pack.note3">start from a conversation.</span></p>
         </div>
     </section>
 
@@ -324,41 +328,41 @@
     <section id="process" class="process">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">How we start</span>
-                <h2 class="section-title">Four clear steps</h2>
-                <p class="section-desc">We learn the work, agree the scope, build in pieces you can click, then hand it over.</p>
+                <span class="section-tag" data-i18n="step.tag">How we start</span>
+                <h2 class="section-title" data-i18n="step.title">Four clear steps</h2>
+                <p class="section-desc" data-i18n="step.desc">We learn the work, agree the scope, build in pieces you can click, then hand it over.</p>
             </div>
             <div class="process-timeline">
                 <div class="process-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h3>Discovery</h3>
-                        <p>We map how work actually runs—orders, planning, stock, people—and define the first shippable slice.</p>
-                        <span class="step-time">Week 1</span>
+                        <h3 data-i18n="step.1.t">Discovery</h3>
+                        <p data-i18n="step.1.p">We map how work actually runs—orders, planning, stock, people—and define the first shippable slice.</p>
+                        <span class="step-time" data-i18n="step.1.time">Week 1</span>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <h3>Blueprint</h3>
-                        <p>Data model, modules, permissions, and AI touchpoints. You approve the plan and fixed delivery scope.</p>
-                        <span class="step-time">Week 1–2</span>
+                        <h3 data-i18n="step.2.t">Blueprint</h3>
+                        <p data-i18n="step.2.p">Data model, modules, permissions, and AI touchpoints. You approve the plan and fixed delivery scope.</p>
+                        <span class="step-time" data-i18n="step.2.time">Week 1–2</span>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>Build</h3>
-                        <p>API, UI, and workflows in working increments you can click—not a big-bang surprise at the end.</p>
-                        <span class="step-time">Ongoing sprints</span>
+                        <h3 data-i18n="step.3.t">Build</h3>
+                        <p data-i18n="step.3.p">API, UI, and workflows in working increments you can click—not a big-bang surprise at the end.</p>
+                        <span class="step-time" data-i18n="step.3.time">Ongoing sprints</span>
                     </div>
                 </div>
                 <div class="process-step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <h3>Launch & Hand Over</h3>
-                        <p>Go-live support, training notes, and full ownership of the codebase and deployment.</p>
-                        <span class="step-time">Release</span>
+                        <h3 data-i18n="step.4.t">Launch & Hand Over</h3>
+                        <p data-i18n="step.4.p">Go-live support, training notes, and full ownership of the codebase and deployment.</p>
+                        <span class="step-time" data-i18n="step.4.time">Release</span>
                     </div>
                 </div>
             </div>
@@ -370,23 +374,23 @@
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info">
-                    <span class="section-tag">Get In Touch</span>
-                    <h2 class="section-title">Tell us what you need</h2>
-                    <p>ERP, a website, or item pricing. We’ll reply within 24 hours.</p>
+                    <span class="section-tag" data-i18n="contact.tag">Get In Touch</span>
+                    <h2 class="section-title" data-i18n="contact.title">Tell us what you need</h2>
+                    <p data-i18n="contact.desc">ERP, a website, or item pricing. We’ll reply within 24 hours.</p>
                     
                     <div class="contact-details">
                         <div class="contact-item">
                             <div class="ci-icon">📧</div>
                             <div class="ci-text">
-                                <strong>Email Us</strong>
+                                <strong data-i18n="contact.email">Email Us</strong>
                                 <span><a href="mailto:hello@technovasolutions.com" class="contact-email">hello@technovasolutions.com</a></span>
                             </div>
                         </div>
                         <div class="contact-item">
                             <div class="ci-icon">⏱️</div>
                             <div class="ci-text">
-                                <strong>Response Time</strong>
-                                <span>Within 24 hours</span>
+                                <strong data-i18n="contact.response">Response Time</strong>
+                                <span data-i18n="contact.hours">Within 24 hours</span>
                             </div>
                         </div>
                     </div>
@@ -394,8 +398,8 @@
                     <div class="guarantee-box">
                         <div class="guarantee-icon">🛡️</div>
                         <div class="guarantee-text">
-                            <strong>Clear Scope First</strong>
-                            <p>We don’t sell fog. You get a written plan and a quote you can stand behind before build starts.</p>
+                            <strong data-i18n="contact.scope.t">Clear Scope First</strong>
+                            <p data-i18n="contact.scope.p">We don’t sell fog. You get a written plan and a quote you can stand behind before build starts.</p>
                         </div>
                     </div>
                 </div>
@@ -407,35 +411,35 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" required placeholder="John Smith">
+                                <label for="name" data-i18n="contact.name">Your Name</label>
+                                <input type="text" id="name" name="name" required data-i18n-placeholder="contact.name.ph" placeholder="John Smith">
                             </div>
                             <div class="form-group">
-                                <label for="company">Company (Optional)</label>
-                                <input type="text" id="company" name="company" placeholder="Your Company">
+                                <label for="company" data-i18n="contact.company">Company (Optional)</label>
+                                <input type="text" id="company" name="company" data-i18n-placeholder="contact.company.ph" placeholder="Your Company">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="john@company.com">
+                            <label for="email" data-i18n="contact.emailLabel">Email Address</label>
+                            <input type="email" id="email" name="email" required data-i18n-placeholder="contact.email.ph" placeholder="john@company.com">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="industry">Industry</label>
+                                <label for="industry" data-i18n="contact.industry">Industry</label>
                                 <select id="industry" name="industry">
-                                    <option value="">Select industry</option>
-                                    <option value="manufacturing">Manufacturing</option>
-                                    <option value="apparel">Apparel / Textile</option>
-                                    <option value="wholesale">Wholesale / Distribution</option>
-                                    <option value="warehouse">Warehouse / Logistics</option>
-                                    <option value="services">Professional Services</option>
-                                    <option value="other">Other</option>
+                                    <option value="" data-i18n="contact.industry.ph">Select industry</option>
+                                    <option value="manufacturing" data-i18n="contact.ind.mfg">Manufacturing</option>
+                                    <option value="apparel" data-i18n="contact.ind.apparel">Apparel / Textile</option>
+                                    <option value="wholesale" data-i18n="contact.ind.wholesale">Wholesale / Distribution</option>
+                                    <option value="warehouse" data-i18n="contact.ind.warehouse">Warehouse / Logistics</option>
+                                    <option value="services" data-i18n="contact.ind.services">Professional Services</option>
+                                    <option value="other" data-i18n="contact.ind.other">Other</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="company-size">Company Size</label>
+                                <label for="company-size" data-i18n="contact.size">Company Size</label>
                                 <select id="company-size" name="company-size">
-                                    <option value="">Select size</option>
+                                    <option value="" data-i18n="contact.size.ph">Select size</option>
                                     <option value="1-10">1–10</option>
                                     <option value="11-50">11–50</option>
                                     <option value="51-200">51–200</option>
@@ -445,36 +449,36 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="project-type">Project Type</label>
+                            <label for="project-type" data-i18n="contact.type">Project Type</label>
                             <select id="project-type" name="project-type">
-                                <option value="">What do you need?</option>
-                                <option value="erp">ERP System</option>
-                                <option value="ai">AI Workflow / Integration</option>
-                                <option value="ops-app">Ops Web App / Portal</option>
-                                <option value="pricing">Item pricing subscription</option>
-                                <option value="website">Brand Website</option>
-                                <option value="hybrid">ERP + Website / Hybrid</option>
-                                <option value="other">Something Else</option>
+                                <option value="" data-i18n="contact.type.ph">What do you need?</option>
+                                <option value="erp" data-i18n="contact.type.erp">ERP System</option>
+                                <option value="ai" data-i18n="contact.type.ai">AI Workflow / Integration</option>
+                                <option value="ops-app" data-i18n="contact.type.ops">Ops Web App / Portal</option>
+                                <option value="pricing" data-i18n="contact.type.pricing">Item pricing subscription</option>
+                                <option value="website" data-i18n="contact.type.web">Brand Website</option>
+                                <option value="hybrid" data-i18n="contact.type.hybrid">ERP + Website / Hybrid</option>
+                                <option value="other" data-i18n="contact.type.other">Something Else</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="budget">Budget Range</label>
+                            <label for="budget" data-i18n="contact.budget">Budget Range</label>
                             <select id="budget" name="budget">
-                                <option value="">Select budget range</option>
-                                <option value="site-starter">Website — $499 Starter</option>
-                                <option value="site-pro">Website — $999 Professional</option>
-                                <option value="site-biz">Website — $1,999 Business</option>
-                                <option value="erp-custom">ERP / AI — custom quote</option>
-                                <option value="pricing-custom">Pricing &amp; margin — custom quote</option>
-                                <option value="unsure">Not sure yet</option>
+                                <option value="" data-i18n="contact.budget.ph">Select budget range</option>
+                                <option value="site-starter" data-i18n="contact.budget.s">Website — $499 Starter</option>
+                                <option value="site-pro" data-i18n="contact.budget.p">Website — $999 Professional</option>
+                                <option value="site-biz" data-i18n="contact.budget.b">Website — $1,999 Business</option>
+                                <option value="erp-custom" data-i18n="contact.budget.erp">ERP / AI — custom quote</option>
+                                <option value="pricing-custom" data-i18n="contact.budget.price">Pricing &amp; margin — custom quote</option>
+                                <option value="unsure" data-i18n="contact.budget.unsure">Not sure yet</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="message">Tell Us About Your Project</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Describe the operation or product: orders, planning, warehouse, AI goals, or the site you need."></textarea>
+                            <label for="message" data-i18n="contact.message">Tell Us About Your Project</label>
+                            <textarea id="message" name="message" rows="4" data-i18n-placeholder="contact.message.ph" placeholder="Describe the operation or product: orders, planning, warehouse, AI goals, or the site you need."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-full">
-                            <span>Send & Get Quote</span>
+                            <span data-i18n="contact.submit">Send & Get Quote</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                             </svg>
@@ -491,26 +495,27 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo logo--footer" aria-label="Technova Solutions — home">
+                    <a href="index.html" class="logo logo--footer" data-i18n-aria="a11y.home" aria-label="Technova Solutions — home">
                         <img src="logo.png" alt="" class="logo-img logo-img--footer" width="520" height="200" decoding="async">
                     </a>
-                    <p>ERP systems, websites, and item pricing.</p>
+                    <p data-i18n="footer.blurb">ERP systems, websites, and item pricing.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#erp">ERP</a>
-                    <a href="#websites">Websites</a>
-                    <a href="profit-calculator/index.html">Item pricing</a>
-                    <a href="#work">Work</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#erp" data-i18n="nav.erp">ERP</a>
+                    <a href="#websites" data-i18n="nav.websites">Websites</a>
+                    <a href="profit-calculator/index.html" data-i18n="nav.pricing">Item pricing</a>
+                    <a href="#work" data-i18n="nav.work">Work</a>
+                    <a href="#contact" data-i18n="nav.contact">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p><span class="footer-est">Est. 2024</span> · © 2024–2026 Technova Solutions. All rights reserved.</p>
+                <p><span class="footer-est" data-i18n="footer.est">Est. 2024</span> · © 2024–2026 Technova Solutions. All rights reserved.</p>
                 <p class="footer-legal"><a href="mailto:hello@technovasolutions.com">hello@technovasolutions.com</a></p>
             </div>
         </div>
     </footer>
 
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

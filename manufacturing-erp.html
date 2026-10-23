@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manufacturing ERP Starter Slice by Technova Solutions — orders, planning, and warehouse in a fixed first delivery. Expand into production, purchases, and AI.">
+    <meta name="description" data-i18n="meta.erpDesc" content="Manufacturing ERP Starter Slice by Technova Solutions — orders, planning, and warehouse in a fixed first delivery. Expand into production, purchases, and AI.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="canonical" href="https://technovasolutions.com/manufacturing-erp.html">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <title>Manufacturing ERP Starter Slice | Technova Solutions</title>
+    <title data-i18n="meta.erpTitle">Manufacturing ERP Starter Slice | Technova Solutions</title>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://technovasolutions.com/manufacturing-erp.html">
     <meta property="og:title" content="Manufacturing ERP Starter Slice | Technova Solutions">
@@ -19,18 +19,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    <nav class="navbar" aria-label="Primary">
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
+    <nav class="navbar" data-i18n-aria="a11y.nav" aria-label="Primary">
         <div class="nav-container">
-            <a href="index.html" class="logo logo--nav" aria-label="Technova Solutions — home">
+            <a href="index.html" class="logo logo--nav" data-i18n-aria="a11y.home" aria-label="Technova Solutions — home">
                 <img src="logo.png" alt="" class="logo-img" width="440" height="132" decoding="async" fetchpriority="high">
             </a>
             <ul id="site-nav" class="nav-links">
-                <li><a href="manufacturing-erp.html" aria-current="page">ERP</a></li>
-                <li><a href="index.html#websites">Websites</a></li>
-                <li><a href="index.html#work">Work</a></li>
-                <li><a href="index.html#contact" class="nav-cta" data-prefill="erp">Talk to Us</a></li>
+                <li><a href="manufacturing-erp.html" aria-current="page" data-i18n="nav.erp">ERP</a></li>
+                <li><a href="index.html#websites" data-i18n="nav.websites">Websites</a></li>
+                <li><a href="index.html#work" data-i18n="nav.work">Work</a></li>
+                <li><a href="index.html#contact" class="nav-cta" data-prefill="erp" data-i18n="nav.talk">Talk to Us</a></li>
             </ul>
+            <div class="lang-switch" role="group" data-i18n-aria="a11y.language" aria-label="Language">
+                <button type="button" class="lang-switch-btn" data-set-lang="en" lang="en">EN</button>
+                <button type="button" class="lang-switch-btn" data-set-lang="tr" lang="tr">TR</button>
+            </div>
             <button type="button" class="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
                 <span></span>
                 <span></span>
@@ -43,20 +47,20 @@
         <header class="offer-hero">
             <div class="container offer-hero-inner">
                 <div class="offer-hero-copy">
-                    <span class="section-tag">Flagship offer</span>
-                    <h1 class="offer-hero-title">Manufacturing ERP<br><span class="gradient-text">Starter Slice</span></h1>
-                    <p class="offer-hero-sub">
+                    <span class="section-tag" data-i18n="erp.tag">Flagship offer</span>
+                    <h1 class="offer-hero-title"><span data-i18n="erp.h1a">Manufacturing ERP</span><br><span class="gradient-text" data-i18n="erp.h1b">Starter Slice</span></h1>
+                    <p class="offer-hero-sub" data-i18n="erp.sub">
                         A focused first delivery for operations teams: get orders, planning, and warehouse
                         on one spine—then expand without throwing the foundation away.
                     </p>
                     <div class="hero-actions">
                         <a href="index.html#contact" class="btn btn-primary" data-prefill="erp" data-offer="manufacturing-starter">
-                            <span>Request this offer</span>
+                            <span data-i18n="erp.request">Request this offer</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </a>
-                        <a href="index.html#work" class="btn btn-secondary">See Temberz work</a>
+                        <a href="index.html#work" class="btn btn-secondary" data-i18n="erp.seeWork">See Temberz work</a>
                     </div>
                 </div>
             </div>
@@ -65,30 +69,30 @@
         <section class="offer-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">In scope</span>
-                    <h2 class="section-title">What You Get in Slice One</h2>
-                    <p class="section-desc">Enough to run day-to-day work honestly—not a demo that dies after the kickoff.</p>
+                    <span class="section-tag" data-i18n="erp.scope.tag">In scope</span>
+                    <h2 class="section-title" data-i18n="erp.scope.title">What You Get in Slice One</h2>
+                    <p class="section-desc" data-i18n="erp.scope.desc">Enough to run day-to-day work honestly—not a demo that dies after the kickoff.</p>
                 </div>
                 <ul class="offer-scope">
                     <li>
-                        <strong>Orders &amp; customers</strong>
-                        <span>Capture, track, and hand work into planning with a clear status path.</span>
+                        <strong data-i18n="erp.s1.t">Orders &amp; customers</strong>
+                        <span data-i18n="erp.s1.d">Capture, track, and hand work into planning with a clear status path.</span>
                     </li>
                     <li>
-                        <strong>Planning board</strong>
-                        <span>Schedule visibility so capacity and commitments stop living in chat.</span>
+                        <strong data-i18n="erp.s2.t">Planning board</strong>
+                        <span data-i18n="erp.s2.d">Schedule visibility so capacity and commitments stop living in chat.</span>
                     </li>
                     <li>
-                        <strong>Warehouse visibility</strong>
-                        <span>Materials and product stock views tied to what you’re trying to ship.</span>
+                        <strong data-i18n="erp.s3.t">Warehouse visibility</strong>
+                        <span data-i18n="erp.s3.d">Materials and product stock views tied to what you’re trying to ship.</span>
                     </li>
                     <li>
-                        <strong>Auth &amp; roles</strong>
-                        <span>Who can see and change what—plus an audit trail for sensitive moves.</span>
+                        <strong data-i18n="erp.s4.t">Auth &amp; roles</strong>
+                        <span data-i18n="erp.s4.d">Who can see and change what—plus an audit trail for sensitive moves.</span>
                     </li>
                     <li>
-                        <strong>Handover</strong>
-                        <span>You own the codebase, deploy path, and documentation for the slice.</span>
+                        <strong data-i18n="erp.s5.t">Handover</strong>
+                        <span data-i18n="erp.s5.d">You own the codebase, deploy path, and documentation for the slice.</span>
                     </li>
                 </ul>
             </div>
@@ -97,37 +101,37 @@
         <section class="offer-section offer-section--alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Timeline</span>
-                    <h2 class="section-title">Typical Delivery Shape</h2>
-                    <p class="section-desc">Exact dates depend on discovery. This is the rhythm we use for the starter slice.</p>
+                    <span class="section-tag" data-i18n="erp.time.tag">Timeline</span>
+                    <h2 class="section-title" data-i18n="erp.time.title">Typical Delivery Shape</h2>
+                    <p class="section-desc" data-i18n="erp.time.desc">Exact dates depend on discovery. This is the rhythm we use for the starter slice.</p>
                 </div>
                 <ol class="offer-timeline">
                     <li>
                         <span class="offer-timeline-step">1</span>
                         <div>
-                            <h3>Discovery (about 1 week)</h3>
-                            <p>Map your real flow—orders, planning, stock, people. Lock the first slice.</p>
+                            <h3 data-i18n="erp.t1.t">Discovery (about 1 week)</h3>
+                            <p data-i18n="erp.t1.d">Map your real flow—orders, planning, stock, people. Lock the first slice.</p>
                         </div>
                     </li>
                     <li>
                         <span class="offer-timeline-step">2</span>
                         <div>
-                            <h3>Blueprint &amp; quote</h3>
-                            <p>Data model, screens, permissions. Fixed delivery plan before build heats up.</p>
+                            <h3 data-i18n="erp.t2.t">Blueprint &amp; quote</h3>
+                            <p data-i18n="erp.t2.d">Data model, screens, permissions. Fixed delivery plan before build heats up.</p>
                         </div>
                     </li>
                     <li>
                         <span class="offer-timeline-step">3</span>
                         <div>
-                            <h3>Build sprints (typically 6–10 weeks)</h3>
-                            <p>Working software every sprint you can click—not a big-bang reveal.</p>
+                            <h3 data-i18n="erp.t3.t">Build sprints (typically 6–10 weeks)</h3>
+                            <p data-i18n="erp.t3.d">Working software every sprint you can click—not a big-bang reveal.</p>
                         </div>
                     </li>
                     <li>
                         <span class="offer-timeline-step">4</span>
                         <div>
-                            <h3>Launch &amp; expand</h3>
-                            <p>Go-live support, then optional modules: production, purchases, shipments, AI assist.</p>
+                            <h3 data-i18n="erp.t4.t">Launch &amp; expand</h3>
+                            <p data-i18n="erp.t4.d">Go-live support, then optional modules: production, purchases, shipments, AI assist.</p>
                         </div>
                     </li>
                 </ol>
@@ -137,28 +141,28 @@
         <section class="offer-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Fit</span>
-                    <h2 class="section-title">Who This Is For</h2>
+                    <span class="section-tag" data-i18n="erp.fit.tag">Fit</span>
+                    <h2 class="section-title" data-i18n="erp.fit.title">Who This Is For</h2>
                 </div>
                 <div class="trust-grid">
                     <div class="trust-block">
-                        <h3>Good fit</h3>
-                        <p>Manufacturers and apparel/textile ops tired of spreadsheets; teams ready to own software; leaders who want a first slice live this quarter—not a 18‑month waterfall.</p>
+                        <h3 data-i18n="erp.fit.good.t">Good fit</h3>
+                        <p data-i18n="erp.fit.good.d">Manufacturers and apparel/textile ops tired of spreadsheets; teams ready to own software; leaders who want a first slice live this quarter—not a 18‑month waterfall.</p>
                     </div>
                     <div class="trust-block">
-                        <h3>Not a fit (yet)</h3>
-                        <p>One-page brochure sites only; “install SAP tomorrow” expectations; projects with no internal owner for process decisions.</p>
+                        <h3 data-i18n="erp.fit.no.t">Not a fit (yet)</h3>
+                        <p data-i18n="erp.fit.no.d">One-page brochure sites only; “install SAP tomorrow” expectations; projects with no internal owner for process decisions.</p>
                     </div>
                     <div class="trust-block">
-                        <h3>After slice one</h3>
-                        <p>Production jobs, purchases, shipments, deeper warehouse, and AI in the planning loop—built on the same spine.</p>
+                        <h3 data-i18n="erp.fit.after.t">After slice one</h3>
+                        <p data-i18n="erp.fit.after.d">Production jobs, purchases, shipments, deeper warehouse, and AI in the planning loop—built on the same spine.</p>
                     </div>
                 </div>
                 <div class="offer-cta-row">
                     <a href="index.html#contact" class="btn btn-primary btn-large" data-prefill="erp" data-offer="manufacturing-starter">
-                        <span>Start with this offer</span>
+                        <span data-i18n="erp.start">Start with this offer</span>
                     </a>
-                    <a href="index.html#pricing" class="btn btn-secondary btn-large">Looking for a website?</a>
+                    <a href="index.html#pricing" class="btn btn-secondary btn-large" data-i18n="erp.web">Looking for a website?</a>
                 </div>
             </div>
         </section>
@@ -168,27 +172,28 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo logo--footer" aria-label="Technova Solutions — home">
+                    <a href="index.html" class="logo logo--footer" data-i18n-aria="a11y.home" aria-label="Technova Solutions — home">
                         <img src="logo.png" alt="" class="logo-img logo-img--footer" width="520" height="200" decoding="async">
                     </a>
-                    <p>ERP systems, websites, and item pricing.</p>
+                    <p data-i18n="footer.blurb">ERP systems, websites, and item pricing.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="manufacturing-erp.html">ERP</a>
-                    <a href="index.html#websites">Websites</a>
-                    <a href="profit-calculator/index.html">Item pricing</a>
-                    <a href="index.html#work">Work</a>
-                    <a href="index.html#contact">Contact</a>
+                    <a href="index.html" data-i18n="nav.home">Home</a>
+                    <a href="manufacturing-erp.html" data-i18n="nav.erp">ERP</a>
+                    <a href="index.html#websites" data-i18n="nav.websites">Websites</a>
+                    <a href="profit-calculator/index.html" data-i18n="nav.pricing">Item pricing</a>
+                    <a href="index.html#work" data-i18n="nav.work">Work</a>
+                    <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p><span class="footer-est">Est. 2024</span> · © 2024–2026 Technova Solutions. All rights reserved.</p>
+                <p><span class="footer-est" data-i18n="footer.est">Est. 2024</span> · © 2024–2026 Technova Solutions. All rights reserved.</p>
                 <p class="footer-legal"><a href="mailto:hello@technovasolutions.com">hello@technovasolutions.com</a></p>
             </div>
         </div>
     </footer>
 
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

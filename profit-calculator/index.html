@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Item pricing is a Technova subscription. See a short demo, then contact us to subscribe.">
+    <meta name="description" data-i18n="meta.priceDesc" content="Item pricing is a Technova subscription. See a short demo, then contact us to subscribe.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="canonical" href="https://technovasolutions.com/profit-calculator/">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="../favicon.svg">
-    <title>Item Pricing | Technova Solutions</title>
+    <title data-i18n="meta.priceTitle">Item Pricing | Technova Solutions</title>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://technovasolutions.com/profit-calculator/">
     <meta property="og:title" content="Item Pricing | Technova Solutions">
@@ -24,18 +24,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    <nav class="navbar" aria-label="Primary">
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
+    <nav class="navbar" data-i18n-aria="a11y.nav" aria-label="Primary">
         <div class="nav-container">
-            <a href="../index.html" class="logo logo--nav" aria-label="Technova Solutions — home">
+            <a href="../index.html" class="logo logo--nav" data-i18n-aria="a11y.home" aria-label="Technova Solutions — home">
                 <img src="../logo.png" alt="" class="logo-img" width="440" height="132" decoding="async" fetchpriority="high">
             </a>
             <ul id="site-nav" class="nav-links">
-                <li><a href="../manufacturing-erp.html">ERP</a></li>
-                <li><a href="../index.html#websites">Websites</a></li>
-                <li><a href="../index.html#work">Work</a></li>
-                <li><a href="../index.html#contact" class="nav-cta">Talk to Us</a></li>
+                <li><a href="../manufacturing-erp.html" data-i18n="nav.erp">ERP</a></li>
+                <li><a href="../index.html#websites" data-i18n="nav.websites">Websites</a></li>
+                <li><a href="../index.html#work" data-i18n="nav.work">Work</a></li>
+                <li><a href="../index.html#contact" class="nav-cta" data-i18n="nav.talk">Talk to Us</a></li>
             </ul>
+            <div class="lang-switch" role="group" data-i18n-aria="a11y.language" aria-label="Language">
+                <button type="button" class="lang-switch-btn" data-set-lang="en" lang="en">EN</button>
+                <button type="button" class="lang-switch-btn" data-set-lang="tr" lang="tr">TR</button>
+            </div>
             <button type="button" class="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
                 <span></span>
                 <span></span>
@@ -47,40 +51,40 @@
     <main id="main-content" class="calc-main">
         <div class="container calc-wrap">
             <header class="calc-intro">
-                <span class="section-tag">Technova service</span>
-                <h1>Item <span class="gradient-text">Pricing</span></h1>
-                <p>We price the items. You subscribe, send the catalog, and get a selling price that keeps the margin after VAT, card fees, shipping, and tax.</p>
+                <span class="section-tag" data-i18n="price.tag">Technova service</span>
+                <h1><span data-i18n="price.h1a">Item</span> <span class="gradient-text" data-i18n="price.h1b">Pricing</span></h1>
+                <p data-i18n="price.lead">We price the items. You subscribe, send the catalog, and get a selling price that keeps the margin after VAT, card fees, shipping, and tax.</p>
             </header>
 
             <section class="panel example" aria-labelledby="example-title">
                 <div class="panel-head">
                     <div>
-                        <h2 id="example-title">A small demo</h2>
+                        <h2 id="example-title" data-i18n="price.demo">A small demo</h2>
                     </div>
-                    <p>One sample item. Your catalog uses your own rates.</p>
+                    <p data-i18n="price.demo.side">One sample item. Your catalog uses your own rates.</p>
                 </div>
-                <p class="footnote">Item cost 100 TL. VAT 20%, already inside the price. No card fee and no company tax. Target net margin 40%.</p>
+                <p class="footnote" data-i18n="price.demo.note">Item cost 100 TL. VAT 20%, already inside the price. No card fee and no company tax. Target net margin 40%.</p>
                 <div class="answer">
                     <div class="answer-cell">
-                        <h3>Item price</h3>
+                        <h3 data-i18n="price.demo.price">Item price</h3>
                         <p class="figure">200.00 TL</p>
-                        <p>Demo only.</p>
+                        <p data-i18n="price.demo.only">Demo only.</p>
                     </div>
                     <div class="answer-cell">
-                        <h3>Net margin</h3>
+                        <h3 data-i18n="price.demo.margin">Net margin</h3>
                         <p class="figure">40%</p>
-                        <p>After VAT, for this demo.</p>
+                        <p data-i18n="price.demo.after">After VAT, for this demo.</p>
                     </div>
                 </div>
             </section>
 
             <section class="service-ask" aria-labelledby="subscribe-title">
                 <div>
-                    <span class="section-tag">Subscription</span>
-                    <h2 id="subscribe-title">Contact us to subscribe</h2>
-                    <p>Tell us about the catalog and the margin you want to keep. We’ll reply with how the subscription works.</p>
+                    <span class="section-tag" data-i18n="price.sub.tag">Subscription</span>
+                    <h2 id="subscribe-title" data-i18n="price.sub.title">Contact us to subscribe</h2>
+                    <p data-i18n="price.sub.p">Tell us about the catalog and the margin you want to keep. We’ll reply with how the subscription works.</p>
                 </div>
-                <a class="btn btn-primary btn-large" href="../index.html#contact" data-prefill="pricing" data-offer="margin-pricing">Contact us</a>
+                <a class="btn btn-primary btn-large" href="../index.html#contact" data-prefill="pricing" data-offer="margin-pricing" data-i18n="price.sub.cta">Contact us</a>
             </section>
         </div>
     </main>
@@ -89,27 +93,28 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="../index.html" class="logo logo--footer" aria-label="Technova Solutions — home">
+                    <a href="../index.html" class="logo logo--footer" data-i18n-aria="a11y.home" aria-label="Technova Solutions — home">
                         <img src="../logo.png" alt="" class="logo-img logo-img--footer" width="520" height="200" decoding="async">
                     </a>
-                    <p>ERP systems, websites, and item pricing.</p>
+                    <p data-i18n="footer.blurb">ERP systems, websites, and item pricing.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="../index.html">Home</a>
-                    <a href="../manufacturing-erp.html">ERP</a>
-                    <a href="../index.html#websites">Websites</a>
-                    <a href="index.html" aria-current="page">Item pricing</a>
-                    <a href="../index.html#work">Work</a>
-                    <a href="../index.html#contact">Contact</a>
+                    <a href="../index.html" data-i18n="nav.home">Home</a>
+                    <a href="../manufacturing-erp.html" data-i18n="nav.erp">ERP</a>
+                    <a href="../index.html#websites" data-i18n="nav.websites">Websites</a>
+                    <a href="index.html" aria-current="page" data-i18n="nav.pricing">Item pricing</a>
+                    <a href="../index.html#work" data-i18n="nav.work">Work</a>
+                    <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p><span class="footer-est">Est. 2024</span> · © 2024–2026 Technova Solutions. All rights reserved.</p>
+                <p><span class="footer-est" data-i18n="footer.est">Est. 2024</span> · © 2024–2026 Technova Solutions. All rights reserved.</p>
                 <p class="footer-legal"><a href="mailto:hello@technovasolutions.com">hello@technovasolutions.com</a></p>
             </div>
         </div>
     </footer>
 
+    <script src="../i18n.js"></script>
     <script src="../script.js"></script>
 </body>
 </html>

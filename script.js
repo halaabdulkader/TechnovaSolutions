@@ -3,6 +3,14 @@
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    TechnovaI18n.onChange(() => {
+        const toggle = document.querySelector('.mobile-toggle');
+        if (toggle) {
+            const open = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-label', TechnovaI18n.t(open ? 'a11y.closeMenu' : 'a11y.openMenu'));
+        }
+        refreshOfferMessage();
+    });
     initNavbar();
     initLeadPrefill();
     initContactForm();
@@ -25,7 +33,7 @@ function initNavbar() {
         navLinks.classList.remove('active');
         mobileToggle.classList.remove('active');
         mobileToggle.setAttribute('aria-expanded', 'false');
-        mobileToggle.setAttribute('aria-label', 'Open menu');
+        mobileToggle.setAttribute('aria-label', TechnovaI18n.t('a11y.openMenu'));
         document.body.classList.remove('nav-open');
     }
 
@@ -34,7 +42,7 @@ function initNavbar() {
         navLinks.classList.add('active');
         mobileToggle.classList.add('active');
         mobileToggle.setAttribute('aria-expanded', 'true');
-        mobileToggle.setAttribute('aria-label', 'Close menu');
+        mobileToggle.setAttribute('aria-label', TechnovaI18n.t('a11y.closeMenu'));
         document.body.classList.add('nav-open');
     }
 
@@ -92,14 +100,28 @@ const CONTACT_INBOX = 'hello@technovasolutions.com';
 const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_INBOX}`;
 const LEAD_PREFILL_KEY = 'technovaLeadPrefill';
 
-function offerMessage(offer) {
-    if (offer === 'manufacturing-starter') {
-        return 'Interested in the Manufacturing ERP Starter Slice (orders, planning, warehouse).';
-    }
-    if (offer === 'margin-pricing') {
-        return 'Interested in subscribing to item pricing. I want Technova to set prices that hold a net margin after VAT, card fees, shipping, and tax.';
-    }
+let activeOffer = '';
+
+function offerKey(offer) {
+    if (offer === 'manufacturing-starter') return 'offer.erp';
+    if (offer === 'margin-pricing') return 'offer.pricing';
     return '';
+}
+
+function offerMessage(offer) {
+    const key = offerKey(offer);
+    return key ? TechnovaI18n.t(key) : '';
+}
+
+function refreshOfferMessage() {
+    const msgEl = document.querySelector('#contactForm [name="message"]');
+    const key = offerKey(activeOffer);
+    if (!msgEl || !key) return;
+    const pair = TechnovaI18n.pair(key);
+    const current = msgEl.value;
+    if (!current.trim() || current === pair.en || current === pair.tr) {
+        msgEl.value = TechnovaI18n.t(key);
+    }
 }
 
 function readPrefillFromEl(el) {
@@ -127,6 +149,7 @@ function applyLeadPrefill(prefill) {
     const msgEl = form.elements.namedItem('message');
     if (prefill.projectType && typeEl) typeEl.value = prefill.projectType;
     if (prefill.budget && budgetEl) budgetEl.value = prefill.budget;
+    if (prefill.offer) activeOffer = prefill.offer;
     if (prefill.message && msgEl && !String(msgEl.value || '').trim()) {
         msgEl.value = prefill.message;
     }
@@ -239,7 +262,7 @@ function initContactForm() {
         if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.setAttribute('aria-busy', 'true');
-            if (btnLabel) btnLabel.textContent = 'Sending…';
+            if (btnLabel) btnLabel.textContent = TechnovaI18n.t('contact.sending');
         }
 
         try {
@@ -257,10 +280,7 @@ function initContactForm() {
                 res.ok && (json.success === 'true' || json.success === true || json.success === 'True');
 
             if (ok) {
-                showNotification(
-                    "Thanks! We'll email you within 24 hours with your quote.",
-                    'success'
-                );
+                showNotification(TechnovaI18n.t('contact.thanks'), 'success');
                 form.reset();
             } else {
                 const hint =
@@ -268,24 +288,24 @@ function initContactForm() {
                         ? json.message
                         : typeof json.error === 'string'
                           ? json.error
-                          : 'Please try again or use the email link.';
-                showNotification(`Couldn't send: ${hint}`, 'error', {
+                          : TechnovaI18n.t('contact.tryAgain');
+                showNotification(`${TechnovaI18n.t('contact.fail')}${hint}`, 'error', {
                     duration: 8000,
                     mailtoHref: quoteMailtoLink(data),
-                    mailtoLabel: 'Open email draft'
+                    mailtoLabel: TechnovaI18n.t('contact.mail')
                 });
             }
         } catch {
-            showNotification('Connection problem. Try again in a moment, or open an email draft below.', 'error', {
+            showNotification(TechnovaI18n.t('contact.offline'), 'error', {
                 duration: 9000,
                 mailtoHref: quoteMailtoLink(data),
-                mailtoLabel: 'Open email draft'
+                mailtoLabel: TechnovaI18n.t('contact.mail')
             });
         } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.removeAttribute('aria-busy');
-                if (btnLabel && submitLabel) btnLabel.textContent = submitLabel;
+                if (btnLabel) btnLabel.textContent = TechnovaI18n.t('contact.submit');
             }
         }
     });
@@ -462,7 +482,7 @@ function showNotification(message, type = 'info', opts = {}) {
     const closeBtn = document.createElement('button');
     closeBtn.type = 'button';
     closeBtn.textContent = '×';
-    closeBtn.setAttribute('aria-label', 'Dismiss');
+    closeBtn.setAttribute('aria-label', TechnovaI18n.t('a11y.dismiss'));
     closeBtn.addEventListener('click', () => notification.remove());
 
     notification.appendChild(actions);
