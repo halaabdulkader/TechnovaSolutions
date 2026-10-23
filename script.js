@@ -96,7 +96,7 @@ function initNavbar() {
 // ========================================
 // CONTACT FORM → email (FormSubmit, static-host friendly)
 // ========================================
-const CONTACT_INBOX = 'hello@technovasolutions.com';
+const CONTACT_INBOX = 'info@technova-solutions.com';
 const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_INBOX}`;
 const LEAD_PREFILL_KEY = 'technovaLeadPrefill';
 
