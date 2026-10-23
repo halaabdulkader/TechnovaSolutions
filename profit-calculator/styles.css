@@ -107,6 +107,39 @@
   line-height: 1.6;
 }
 
+.subscribe-form {
+  position: relative;
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: min(100%, 280px);
+}
+
+.subscribe-form .btn {
+  align-self: flex-start;
+}
+
+.access-gate {
+  max-width: 36rem;
+  padding: 22px;
+}
+
+.access-gate h2 {
+  margin: 10px 0 8px;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  letter-spacing: -0.03em;
+}
+
+.access-gate p {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.access-error {
+  color: var(--loss);
+}
+
 .panel,
 .screen {
   background: var(--color-bg-elevated);

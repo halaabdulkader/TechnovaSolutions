@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
     initLeadPrefill();
     initContactForm();
+    initSubscribeForm();
     initPricingRequest();
     initScrollAnimations();
 });
@@ -292,6 +293,88 @@ function initContactForm() {
             showNotification(TechnovaI18n.t('contact.offline'), 'error', {
                 duration: 9000,
                 mailtoHref: quoteMailtoLink(data),
+                mailtoLabel: TechnovaI18n.t('contact.mail')
+            });
+        }
+    });
+}
+
+function subscribeMailto(data) {
+    const subject = 'Item pricing subscription — Technova Solutions';
+    const body = [
+        `Name: ${data.name}`,
+        `Email: ${data.email}`,
+        `Company: ${data.company || '—'}`,
+        '',
+        'Catalog:',
+        data.catalog || '—'
+    ].join('\n');
+    return `mailto:${CONTACT_INBOX}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function initSubscribeForm() {
+    const form = document.getElementById('subscribeForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fd = new FormData(form);
+        if ((fd.get('_honey') || '').toString().trim() !== '') return;
+        if (!form.reportValidity()) return;
+
+        const data = {
+            name: (fd.get('name') || '').toString().trim(),
+            email: (fd.get('email') || '').toString().trim(),
+            company: (fd.get('company') || '').toString().trim(),
+            catalog: (fd.get('catalog') || '').toString().trim()
+        };
+
+        const payload = {
+            name: data.name,
+            email: data.email,
+            company: data.company || '—',
+            catalog: data.catalog,
+            _subject: 'Item pricing subscription — Technova Solutions',
+            _template: 'table',
+            _captcha: false
+        };
+
+        const sentNote = showNotification(TechnovaI18n.t('price.sub.thanks'), 'success');
+        form.reset();
+
+        try {
+            const res = await fetch(FORMSUBMIT_URL, {
+                method: 'POST',
+                keepalive: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            const json = await res.json().catch(() => ({}));
+            const ok =
+                res.ok && (json.success === 'true' || json.success === true || json.success === 'True');
+            if (!ok) {
+                sentNote.remove();
+                const hint =
+                    typeof json.message === 'string'
+                        ? json.message
+                        : typeof json.error === 'string'
+                          ? json.error
+                          : TechnovaI18n.t('contact.tryAgain');
+                showNotification(`${TechnovaI18n.t('contact.fail')}${hint}`, 'error', {
+                    duration: 8000,
+                    mailtoHref: subscribeMailto(data),
+                    mailtoLabel: TechnovaI18n.t('contact.mail')
+                });
+            }
+        } catch {
+            sentNote.remove();
+            showNotification(TechnovaI18n.t('contact.offline'), 'error', {
+                duration: 9000,
+                mailtoHref: subscribeMailto(data),
                 mailtoLabel: TechnovaI18n.t('contact.mail')
             });
         }

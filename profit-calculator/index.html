@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" data-i18n="meta.priceDesc" content="Item pricing is a Technova subscription. See a short demo, then contact us to subscribe.">
+    <meta name="description" data-i18n="meta.priceDesc" content="Item pricing for startups that need help setting a price. Technova sets a selling price that still leaves a margin.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="canonical" href="https://technovasolutions.com/profit-calculator/">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -12,11 +12,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://technovasolutions.com/profit-calculator/">
     <meta property="og:title" content="Item Pricing | Technova Solutions">
-    <meta property="og:description" content="A Technova subscription. See a short demo, then contact us to subscribe.">
+    <meta property="og:description" content="Item pricing for startups that need help setting a price. Technova sets a selling price that still leaves a margin.">
     <meta property="og:site_name" content="Technova Solutions">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Item Pricing | Technova Solutions">
-    <meta name="twitter:description" content="A Technova subscription. See a short demo, then contact us to subscribe.">
+    <meta name="twitter:description" content="Item pricing for startups that need help setting a price. Technova sets a selling price that still leaves a margin.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@
             <header class="calc-intro">
                 <span class="section-tag" data-i18n="price.tag">Technova service</span>
                 <h1><span data-i18n="price.h1a">Item</span> <span class="gradient-text" data-i18n="price.h1b">Pricing</span></h1>
-                <p data-i18n="price.lead">Subscribe, and we give you the pricing page. You enter the item. The page sets the selling price so the margin holds after VAT, card fees, shipping, and tax.</p>
+                <p data-i18n="price.lead">For startups that need help pricing their items. We set a selling price that still leaves a margin after VAT, card fees, shipping, and tax.</p>
             </header>
 
             <section class="walk" aria-labelledby="walk-title">
@@ -133,18 +133,42 @@
                     </li>
                     <li>
                         <span>3</span>
-                        <div><strong data-i18n="price.how.3">We send you the pricing page</strong></div>
+                        <div><strong data-i18n="price.how.3">We email you the access code</strong></div>
                     </li>
                 </ol>
             </section>
 
-            <section class="service-ask" aria-labelledby="subscribe-title">
+            <section class="service-ask" id="subscribe" aria-labelledby="subscribe-title">
                 <div>
                     <span class="section-tag" data-i18n="price.sub.tag">Subscription</span>
-                    <h2 id="subscribe-title" data-i18n="price.sub.title">Contact us to subscribe</h2>
-                    <p data-i18n="price.sub.p">Tell us about the catalog. After you subscribe, we send the page that does the pricing.</p>
+                    <h2 id="subscribe-title" data-i18n="price.sub.title">Subscribe</h2>
+                    <p data-i18n="price.sub.p">Tell us what your startup sells. We confirm the subscription and email the access code for the pricing page.</p>
                 </div>
-                <a class="btn btn-primary btn-large" href="../index.html#contact" data-prefill="pricing" data-offer="margin-pricing" data-i18n="price.sub.cta">Contact us</a>
+                <form id="subscribeForm" class="subscribe-form" novalidate>
+                    <div class="contact-honeypot" aria-hidden="true">
+                        <label for="subscribe-honey">Do not fill</label>
+                        <input type="text" id="subscribe-honey" name="_honey" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="subscribe-name" data-i18n="price.sub.name">Your name</label>
+                        <input id="subscribe-name" name="name" type="text" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="subscribe-email" data-i18n="price.sub.email">Email</label>
+                        <input id="subscribe-email" name="email" type="email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="subscribe-company" data-i18n="price.sub.company">Company</label>
+                        <input id="subscribe-company" name="company" type="text" autocomplete="organization">
+                    </div>
+                    <div class="form-group">
+                        <label for="subscribe-catalog" data-i18n="price.sub.catalog">What you sell</label>
+                        <textarea id="subscribe-catalog" name="catalog" rows="3" required data-i18n-placeholder="price.sub.catalog.ph" placeholder="Products, roughly how many items, and the margin you want to hold."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span data-i18n="price.sub.send">Request subscription</span>
+                    </button>
+                </form>
             </section>
         </div>
     </main>

@@ -13,11 +13,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://technovasolutions.com/profit-calculator/tool.html">
     <meta property="og:title" content="Item Pricing | Technova Solutions">
-    <meta property="og:description" content="A Technova subscription. See a short demo, then contact us to subscribe.">
+    <meta property="og:description" content="Item pricing for startups that need help setting a price. Technova sets a selling price that still leaves a margin.">
     <meta property="og:site_name" content="Technova Solutions">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Item Pricing | Technova Solutions">
-    <meta name="twitter:description" content="A Technova subscription. See a short demo, then contact us to subscribe.">
+    <meta name="twitter:description" content="Item pricing for startups that need help setting a price. Technova sets a selling price that still leaves a margin.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -56,6 +56,24 @@
                 <h1><span data-i18n="price.h1a">Item</span> <span class="gradient-text" data-i18n="price.h1b">Pricing</span></h1>
                 <p data-i18n="tool.lead">This is the pricing page. Enter an item. The selling price and the margin update here.</p>
             </header>
+
+            <section id="accessGate" class="panel access-gate" aria-labelledby="access-title">
+                <span class="section-tag" data-i18n="price.sub.tag">Subscription</span>
+                <h2 id="access-title" data-i18n="tool.gate.title">Open your pricing page</h2>
+                <p data-i18n="tool.gate.lead">Enter the access code from your subscription email.</p>
+                <form id="accessForm" class="access-form" autocomplete="off">
+                    <label class="field stack">
+                        <span data-i18n="tool.gate.code">Access code</span>
+                        <input id="accessCode" name="code" type="text" autocomplete="off" spellcheck="false" required>
+                    </label>
+                    <div class="actions">
+                        <button type="submit" class="primary" data-i18n="tool.gate.open">Open the pricing page</button>
+                    </div>
+                    <p id="accessError" class="access-error" hidden data-i18n="tool.gate.bad">That code is not on a subscription.</p>
+                </form>
+            </section>
+
+            <div id="calculator" hidden>
 
             <section class="panel settings" aria-labelledby="settings-title">
                 <div class="panel-head">
@@ -306,6 +324,7 @@
                 </div>
                 <div id="savedList" class="saved-list"></div>
             </section>
+            </div>
         </div>
     </main>
 
@@ -336,7 +355,9 @@
 
     <script src="../i18n.js"></script>
     <script src="../script.js"></script>
+    <script src="access.js"></script>
     <script src="calculator.js"></script>
     <script src="app.js"></script>
+    <script src="access-gate.js"></script>
 </body>
 </html>
