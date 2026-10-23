@@ -5,22 +5,53 @@
     var form = document.getElementById('accessForm');
     var input = document.getElementById('accessCode');
     var error = document.getElementById('accessError');
+    var expired = document.getElementById('accessExpired');
     if (!gate || !app || !form || !input) return;
 
-    function codes() {
-        var list = window.TechnovaAccess && window.TechnovaAccess.codes;
-        return Array.isArray(list) ? list : [];
+    function list() {
+        var codes = window.TechnovaAccess && window.TechnovaAccess.codes;
+        return Array.isArray(codes) ? codes : [];
     }
 
-    function allowed(value) {
+    function find(value) {
         var code = String(value || '').trim().toLowerCase();
-        if (!code) return false;
-        return codes().some(function (item) {
-            return String(item).trim().toLowerCase() === code;
+        if (!code) return null;
+        var found = null;
+        list().some(function (item) {
+            var entry = typeof item === 'string' ? { code: item } : item;
+            if (!entry || String(entry.code || '').trim().toLowerCase() !== code) return false;
+            found = entry;
+            return true;
         });
+        return found;
+    }
+
+    function live(entry) {
+        if (!entry || !entry.expires) return false;
+        var end = Date.parse(String(entry.expires) + 'T23:59:59');
+        return !Number.isNaN(end) && end >= Date.now();
+    }
+
+    function forget() {
+        try {
+            localStorage.removeItem(KEY);
+        } catch (err) {
+            /* Nothing stored to clear. */
+        }
+    }
+
+    function show(which) {
+        if (error) error.hidden = which !== 'bad';
+        if (expired) expired.hidden = which !== 'expired';
+    }
+
+    function lock() {
+        app.hidden = true;
+        gate.hidden = false;
     }
 
     function openApp() {
+        show('');
         gate.hidden = true;
         app.hidden = false;
     }
@@ -31,12 +62,29 @@
     } catch (err) {
         saved = '';
     }
-    if (allowed(saved)) openApp();
+    var savedEntry = find(saved);
+    if (savedEntry && live(savedEntry)) openApp();
+    else {
+        lock();
+        if (savedEntry) {
+            forget();
+            show('expired');
+        }
+    }
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        if (!allowed(input.value)) {
-            error.hidden = false;
+        var entry = find(input.value);
+        if (!entry) {
+            lock();
+            show('bad');
+            input.focus();
+            return;
+        }
+        if (!live(entry)) {
+            lock();
+            forget();
+            show('expired');
             input.focus();
             return;
         }
@@ -45,7 +93,6 @@
         } catch (err) {
             /* The page still opens for this visit. */
         }
-        error.hidden = true;
         openApp();
     });
 })();

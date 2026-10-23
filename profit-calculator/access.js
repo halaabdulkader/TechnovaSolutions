@@ -1,4 +1,4 @@
-// One code per subscriber. Email that code with the link to tool.html.
+// expires is the last day the code opens the page. Use YYYY-MM-DD.
 window.TechnovaAccess = {
-    codes: ['TN-PRICE-4F8C']
+    codes: [{ code: 'TN-PRICE-4F8C', expires: '2026-11-23' }]
 };
