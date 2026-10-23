@@ -222,10 +222,6 @@ function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
 
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const btnLabel = submitBtn?.querySelector('span');
-    let submitLabel = btnLabel?.textContent ?? '';
-
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -259,15 +255,13 @@ function initContactForm() {
             _captcha: false
         };
 
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.setAttribute('aria-busy', 'true');
-            if (btnLabel) btnLabel.textContent = TechnovaI18n.t('contact.sending');
-        }
+        const sentNote = showNotification(TechnovaI18n.t('contact.thanks'), 'success');
+        form.reset();
 
         try {
             const res = await fetch(FORMSUBMIT_URL, {
                 method: 'POST',
+                keepalive: true,
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json'
@@ -279,10 +273,8 @@ function initContactForm() {
             const ok =
                 res.ok && (json.success === 'true' || json.success === true || json.success === 'True');
 
-            if (ok) {
-                showNotification(TechnovaI18n.t('contact.thanks'), 'success');
-                form.reset();
-            } else {
+            if (!ok) {
+                sentNote.remove();
                 const hint =
                     typeof json.message === 'string'
                         ? json.message
@@ -296,17 +288,12 @@ function initContactForm() {
                 });
             }
         } catch {
+            sentNote.remove();
             showNotification(TechnovaI18n.t('contact.offline'), 'error', {
                 duration: 9000,
                 mailtoHref: quoteMailtoLink(data),
                 mailtoLabel: TechnovaI18n.t('contact.mail')
             });
-        } finally {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.removeAttribute('aria-busy');
-                if (btnLabel) btnLabel.textContent = TechnovaI18n.t('contact.submit');
-            }
         }
     });
 }
@@ -519,6 +506,7 @@ function showNotification(message, type = 'info', opts = {}) {
     }, duration);
 
     closeBtn.addEventListener('click', () => clearTimeout(t));
+    return notification;
 }
 
 // ========================================
