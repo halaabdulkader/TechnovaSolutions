@@ -97,7 +97,7 @@ function offerMessage(offer) {
         return 'Interested in the Manufacturing ERP Starter Slice (orders, planning, warehouse).';
     }
     if (offer === 'margin-pricing') {
-        return 'Interested in item pricing as a paid engagement. I want prices that hold a net margin after VAT, card fees, shipping, and tax.';
+        return 'Interested in subscribing to item pricing. I want Technova to set prices that hold a net margin after VAT, card fees, shipping, and tax.';
     }
     return '';
 }

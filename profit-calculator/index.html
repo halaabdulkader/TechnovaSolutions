@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technova prices the item so the margin holds after VAT, card fees, shipping, and tax. Send the item. We return the price.">
+    <meta name="description" content="Item pricing is a Technova subscription. See a short demo, then contact us to subscribe.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="canonical" href="https://technovasolutions.com/profit-calculator/">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -12,11 +12,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://technovasolutions.com/profit-calculator/">
     <meta property="og:title" content="Item Pricing | Technova Solutions">
-    <meta property="og:description" content="Send Technova the item. We set the price that keeps the margin.">
+    <meta property="og:description" content="A Technova subscription. See a short demo, then contact us to subscribe.">
     <meta property="og:site_name" content="Technova Solutions">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Item Pricing | Technova Solutions">
-    <meta name="twitter:description" content="Send Technova the item. We set the price that keeps the margin.">
+    <meta name="twitter:description" content="A Technova subscription. See a short demo, then contact us to subscribe.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -33,7 +33,6 @@
             <ul id="site-nav" class="nav-links">
                 <li><a href="../manufacturing-erp.html">ERP</a></li>
                 <li><a href="../index.html#websites">Websites</a></li>
-                <li><a href="index.html" aria-current="page">Item pricing</a></li>
                 <li><a href="../index.html#work">Work</a></li>
                 <li><a href="../index.html#contact" class="nav-cta">Talk to Us</a></li>
             </ul>
@@ -48,138 +47,41 @@
     <main id="main-content" class="calc-main">
         <div class="container calc-wrap">
             <header class="calc-intro">
-                <span class="section-tag">Paid service</span>
+                <span class="section-tag">Technova service</span>
                 <h1>Item <span class="gradient-text">Pricing</span></h1>
-                <p>Technova sets the price. You send the item, the costs, and the margin you want to keep. We return the price after VAT, card fees, shipping, and tax. This page does not calculate it for you.</p>
+                <p>We price the items. You subscribe, send the catalog, and get a selling price that keeps the margin after VAT, card fees, shipping, and tax.</p>
             </header>
 
             <section class="panel example" aria-labelledby="example-title">
                 <div class="panel-head">
                     <div>
-                        <h2 id="example-title">What you get back</h2>
+                        <h2 id="example-title">A small demo</h2>
                     </div>
-                    <p>One example, so you can see the shape of the answer.</p>
+                    <p>One sample item. Your catalog uses your own rates.</p>
                 </div>
-                <p class="footnote">Item cost 100 TL. VAT 20%, already inside the price. No card fee and no company tax. The seller wants a 40% net margin.</p>
+                <p class="footnote">Item cost 100 TL. VAT 20%, already inside the price. No card fee and no company tax. Target net margin 40%.</p>
                 <div class="answer">
                     <div class="answer-cell">
                         <h3>Item price</h3>
                         <p class="figure">200.00 TL</p>
-                        <p>The price for this example only.</p>
+                        <p>Demo only.</p>
                     </div>
                     <div class="answer-cell">
                         <h3>Net margin</h3>
                         <p class="figure">40%</p>
-                        <p>After VAT, for this example.</p>
+                        <p>After VAT, for this demo.</p>
                     </div>
                 </div>
             </section>
 
-            <form id="pricingRequest" class="panel entry" autocomplete="on" novalidate>
-                <div class="panel-head">
-                    <div>
-                        <h2 id="request-title">Send the item</h2>
-                    </div>
-                    <p>We reply with the price. Nothing here is calculated in the browser.</p>
+            <section class="service-ask" aria-labelledby="subscribe-title">
+                <div>
+                    <span class="section-tag">Subscription</span>
+                    <h2 id="subscribe-title">Contact us to subscribe</h2>
+                    <p>Tell us about the catalog and the margin you want to keep. We’ll reply with how the subscription works.</p>
                 </div>
-                <div class="contact-honeypot" aria-hidden="true">
-                    <label for="pricing-honey">Do not fill</label>
-                    <input type="text" id="pricing-honey" name="_honey" tabindex="-1" autocomplete="off">
-                </div>
-                <div class="cost-grid">
-                    <label class="field stack">
-                        <span>Your name</span>
-                        <input id="pricing-name" name="name" type="text" autocomplete="name" required>
-                    </label>
-                    <label class="field stack">
-                        <span>Email</span>
-                        <input id="pricing-email" name="email" type="email" autocomplete="email" required>
-                    </label>
-                    <label class="field stack wide">
-                        <span>Item name</span>
-                        <input id="pricing-item" name="item" type="text" autocomplete="off" required>
-                    </label>
-                    <label class="field stack">
-                        <span>Item cost</span>
-                        <span class="control">
-                            <input id="pricing-cost" name="item-cost" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">TL</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>Other costs</span>
-                        <span class="control">
-                            <input id="pricing-other" name="other-costs" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">TL</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>Actual shipping cost</span>
-                        <span class="control">
-                            <input id="pricing-ship" name="actual-shipping" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">TL</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>Shipping the customer pays</span>
-                        <span class="control">
-                            <input id="pricing-customer-ship" name="customer-shipping" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">TL</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>VAT</span>
-                        <span class="control">
-                            <input id="pricing-vat" name="vat" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">%</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>Price includes VAT</span>
-                        <select id="pricing-vat-included" name="price-includes-vat">
-                            <option value="">Not sure</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </label>
-                    <label class="field stack">
-                        <span>Card commission</span>
-                        <span class="control">
-                            <input id="pricing-card" name="card-commission" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">%</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>Card fee per payment</span>
-                        <span class="control">
-                            <input id="pricing-fee" name="card-fee" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">TL</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>Estimated company tax</span>
-                        <span class="control">
-                            <input id="pricing-tax" name="company-tax" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">%</span>
-                        </span>
-                    </label>
-                    <label class="field stack">
-                        <span>Target net margin</span>
-                        <span class="control">
-                            <input id="pricing-margin" name="target-margin" inputmode="decimal" autocomplete="off">
-                            <span class="suffix">%</span>
-                        </span>
-                    </label>
-                </div>
-                <label class="field stack request-note">
-                    <span>Anything else</span>
-                    <textarea id="pricing-note" name="note" rows="3" placeholder="Catalog size, payment provider, or the margin you need on every item."></textarea>
-                </label>
-                <p id="pricingStatus" class="form-status" role="status"></p>
-                <div class="actions">
-                    <button type="submit" class="primary"><span>Send this item</span></button>
-                </div>
-            </form>
+                <a class="btn btn-primary btn-large" href="../index.html#contact" data-prefill="pricing" data-offer="margin-pricing">Contact us</a>
+            </section>
         </div>
     </main>
 
