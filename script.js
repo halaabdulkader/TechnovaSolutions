@@ -300,11 +300,12 @@ function initContactForm() {
 }
 
 function subscribeMailto(data) {
-    const subject = 'Item pricing subscription — Technova Solutions';
+    const subject = 'What to charge — Technova Solutions';
     const body = [
         `Name: ${data.name}`,
         `Email: ${data.email}`,
         `Company: ${data.company || '—'}`,
+        `Plan: ${data.plan}`,
         '',
         'Catalog:',
         data.catalog || '—'
@@ -323,19 +324,26 @@ function initSubscribeForm() {
         if ((fd.get('_honey') || '').toString().trim() !== '') return;
         if (!form.reportValidity()) return;
 
+        const plans = {
+            monthly: 'Monthly — $15',
+            yearly: 'Yearly — $150'
+        };
+        const plan = plans[(fd.get('plan') || '').toString()] || plans.monthly;
         const data = {
             name: (fd.get('name') || '').toString().trim(),
             email: (fd.get('email') || '').toString().trim(),
             company: (fd.get('company') || '').toString().trim(),
-            catalog: (fd.get('catalog') || '').toString().trim()
+            catalog: (fd.get('catalog') || '').toString().trim(),
+            plan
         };
 
         const payload = {
             name: data.name,
             email: data.email,
             company: data.company || '—',
+            plan: data.plan,
             catalog: data.catalog,
-            _subject: 'Item pricing subscription — Technova Solutions',
+            _subject: `What to charge — ${data.plan}`,
             _template: 'table',
             _captcha: false
         };
@@ -382,7 +390,7 @@ function initSubscribeForm() {
 }
 
 function pricingMailtoLink(data) {
-    const subject = 'Item pricing request — Technova Solutions';
+    const subject = 'What to charge — Technova Solutions';
     const body = [
         `Name: ${data.name}`,
         `Email: ${data.email}`,
@@ -453,7 +461,7 @@ function initPricingRequest() {
             'company-tax': data.tax || '—',
             'target-margin': data.margin || '—',
             note: data.note || '—',
-            _subject: `Item pricing request — ${data.item || data.name}`,
+            _subject: `What to charge — ${data.item || data.name}`,
             _template: 'table',
             _captcha: false
         };

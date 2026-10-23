@@ -1131,6 +1131,12 @@ section {
     align-self: flex-start;
 }
 
+.service-price {
+    margin-top: 14px;
+    color: var(--color-primary-light);
+    font-weight: 600;
+}
+
 .service-card:hover {
     border-color: rgba(212, 175, 55, 0.35);
     transform: translateY(-2px);
@@ -1253,7 +1259,7 @@ section {
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(28px, 4vw, 40px);
 }
 
