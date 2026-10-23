@@ -53,36 +53,96 @@
             <header class="calc-intro">
                 <span class="section-tag" data-i18n="price.tag">Technova service</span>
                 <h1><span data-i18n="price.h1a">Item</span> <span class="gradient-text" data-i18n="price.h1b">Pricing</span></h1>
-                <p data-i18n="price.lead">We price the items. You subscribe, send the catalog, and get a selling price that keeps the margin after VAT, card fees, shipping, and tax.</p>
+                <p data-i18n="price.lead">Subscribe, and we give you the pricing page. You enter the item. The page sets the selling price so the margin holds after VAT, card fees, shipping, and tax.</p>
             </header>
 
-            <section class="panel example" aria-labelledby="example-title">
+            <section class="walk" aria-labelledby="walk-title">
                 <div class="panel-head">
                     <div>
-                        <h2 id="example-title" data-i18n="price.demo">A small demo</h2>
+                        <h2 id="walk-title" data-i18n="price.walk">How the pricing page works</h2>
                     </div>
-                    <p data-i18n="price.demo.side">One sample item. Your catalog uses your own rates.</p>
+                    <p data-i18n="price.walk.side">A preview of the page subscribers use.</p>
                 </div>
-                <p class="footnote" data-i18n="price.demo.note">Item cost 100 TL. VAT 20%, already inside the price. No card fee and no company tax. Target net margin 40%.</p>
-                <div class="answer">
-                    <div class="answer-cell">
-                        <h3 data-i18n="price.demo.price">Item price</h3>
-                        <p class="figure">200.00 TL</p>
-                        <p data-i18n="price.demo.only">Demo only.</p>
+                <ol class="walk-steps">
+                    <li>
+                        <span>1</span>
+                        <div>
+                            <strong data-i18n="price.step1.t">Enter the item</strong>
+                            <p data-i18n="price.step1.d">Cost, VAT, card fee, shipping, tax, and the margin you want.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>2</span>
+                        <div>
+                            <strong data-i18n="price.step2.t">The page sets the price</strong>
+                            <p data-i18n="price.step2.d">You see the selling price and the net margin after those costs.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>3</span>
+                        <div>
+                            <strong data-i18n="price.step3.t">You keep the page</strong>
+                            <p data-i18n="price.step3.d">After you subscribe, this is the page you use for the next item too.</p>
+                        </div>
+                    </li>
+                </ol>
+                <figure class="shot">
+                    <div class="shot-chrome">
+                        <span class="shot-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="shot-url">pricing</span>
                     </div>
-                    <div class="answer-cell">
-                        <h3 data-i18n="price.demo.margin">Net margin</h3>
-                        <p class="figure">40%</p>
-                        <p data-i18n="price.demo.after">After VAT, for this demo.</p>
+                    <div class="shot-screen">
+                        <div class="shot-fields">
+                            <div><span data-i18n="price.shot.cost">Item cost</span><b>100 TL</b></div>
+                            <div><span data-i18n="price.shot.vat">VAT</span><b>20%</b></div>
+                            <div><span data-i18n="price.shot.includes">Price includes VAT</span><b data-i18n="price.shot.yes">Yes</b></div>
+                            <div><span data-i18n="price.shot.margin">Target margin</span><b>40%</b></div>
+                        </div>
+                        <div class="answer">
+                            <div class="answer-cell">
+                                <h3 data-i18n="price.shot.price">Item price</h3>
+                                <p class="figure">200.00 TL</p>
+                            </div>
+                            <div class="answer-cell">
+                                <h3 data-i18n="price.shot.net">Net margin</h3>
+                                <p class="figure">40%</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <figcaption data-i18n="price.shot.cap">Preview only. This picture does not calculate.</figcaption>
+                </figure>
+            </section>
+
+            <section class="panel gets" aria-labelledby="gets-title">
+                <h2 id="gets-title" data-i18n="price.gets">What you get</h2>
+                <ul class="service-features">
+                    <li data-i18n="price.gets.1">The pricing page, opened for your subscription</li>
+                    <li data-i18n="price.gets.2">Your own costs, VAT, card fees, shipping, and tax</li>
+                    <li data-i18n="price.gets.3">A selling price and net margin for each item you enter</li>
+                    <li data-i18n="price.gets.4">The same page for every item after that</li>
+                </ul>
+                <h3 data-i18n="price.how">How you get access</h3>
+                <ol class="walk-steps walk-steps--line">
+                    <li>
+                        <span>1</span>
+                        <div><strong data-i18n="price.how.1">Contact us about the catalog</strong></div>
+                    </li>
+                    <li>
+                        <span>2</span>
+                        <div><strong data-i18n="price.how.2">We confirm the subscription</strong></div>
+                    </li>
+                    <li>
+                        <span>3</span>
+                        <div><strong data-i18n="price.how.3">We send you the pricing page</strong></div>
+                    </li>
+                </ol>
             </section>
 
             <section class="service-ask" aria-labelledby="subscribe-title">
                 <div>
                     <span class="section-tag" data-i18n="price.sub.tag">Subscription</span>
                     <h2 id="subscribe-title" data-i18n="price.sub.title">Contact us to subscribe</h2>
-                    <p data-i18n="price.sub.p">Tell us about the catalog and the margin you want to keep. We’ll reply with how the subscription works.</p>
+                    <p data-i18n="price.sub.p">Tell us about the catalog. After you subscribe, we send the page that does the pricing.</p>
                 </div>
                 <a class="btn btn-primary btn-large" href="../index.html#contact" data-prefill="pricing" data-offer="margin-pricing" data-i18n="price.sub.cta">Contact us</a>
             </section>

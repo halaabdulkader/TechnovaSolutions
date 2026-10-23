@@ -126,6 +126,155 @@
   margin-bottom: 0;
 }
 
+.walk {
+  margin-bottom: 18px;
+}
+
+.walk-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 0;
+}
+
+.walk-steps li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-bg-card);
+}
+
+.walk-steps li > span {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.16);
+  color: var(--color-primary-light);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.walk-steps strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.walk-steps p {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.shot {
+  margin: 0;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #12100c;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+
+.shot-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #1b1814;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.shot-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.shot-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.7);
+}
+
+.shot-url {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.shot-screen {
+  padding: 18px 18px 8px;
+}
+
+.shot-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.shot-fields div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+}
+
+.shot-fields span {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.shot-fields b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.shot .answer {
+  margin-bottom: 0;
+}
+
+.shot figcaption {
+  padding: 12px 18px 16px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.gets {
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+.gets h2 {
+  margin-bottom: 16px;
+}
+
+.gets h3 {
+  margin: 22px 0 12px;
+  font-size: 1.15rem;
+}
+
+.gets .service-features {
+  margin-bottom: 0;
+}
+
+.gets .walk-steps {
+  margin-bottom: 0;
+}
+
 .panel-head,
 .screen-head {
   display: flex;
@@ -605,6 +754,13 @@
   .target-side {
     grid-column: 1 / -1;
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .walk-steps,
+  .shot-fields {
+    grid-template-columns: 1fr;
   }
 }
 
