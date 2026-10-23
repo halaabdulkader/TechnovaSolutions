@@ -91,6 +91,16 @@ const CONTACT_INBOX = 'hello@technovasolutions.com';
 const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_INBOX}`;
 const LEAD_PREFILL_KEY = 'technovaLeadPrefill';
 
+function offerMessage(offer) {
+    if (offer === 'manufacturing-starter') {
+        return 'Interested in the Manufacturing ERP Starter Slice (orders, planning, warehouse).';
+    }
+    if (offer === 'margin-pricing') {
+        return 'Interested in item pricing as a paid engagement. I want prices that hold a net margin after VAT, card fees, shipping, and tax.';
+    }
+    return '';
+}
+
 function readPrefillFromEl(el) {
     const mode = el.getAttribute('data-prefill') || '';
     let projectType = mode;
@@ -98,16 +108,14 @@ function readPrefillFromEl(el) {
     if (mode === 'erp') {
         projectType = 'erp';
         budget = budget || 'erp-custom';
+    } else if (mode === 'pricing') {
+        projectType = 'pricing';
+        budget = budget || 'pricing-custom';
     } else if (mode === 'website') {
         projectType = 'website';
     }
     const offer = el.getAttribute('data-offer') || '';
-    let message = '';
-    if (offer === 'manufacturing-starter') {
-        message =
-            'Interested in the Manufacturing ERP Starter Slice (orders, planning, warehouse).';
-    }
-    return { projectType, budget, offer, message };
+    return { projectType, budget, offer, message: offerMessage(offer) };
 }
 
 function applyLeadPrefill(prefill) {
@@ -153,10 +161,7 @@ function initLeadPrefill() {
         projectType: params.get('type') || '',
         budget: params.get('budget') || '',
         offer: params.get('offer') || '',
-        message:
-            params.get('offer') === 'manufacturing-starter'
-                ? 'Interested in the Manufacturing ERP Starter Slice (orders, planning, warehouse).'
-                : ''
+        message: offerMessage(params.get('offer') || '')
     };
 
     let stored = null;

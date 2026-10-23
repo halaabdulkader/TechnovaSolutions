@@ -68,41 +68,57 @@
     return null;
   }
 
+  function blank(value) {
+    return String(value ?? "").trim() === "";
+  }
+
+  function costsOf(pkg) {
+    var productCost = money(pkg.productCost);
+    var otherCost = blank(pkg.otherCost)
+      ? cents(money(pkg.giftCost) + money(pkg.packagingCost))
+      : money(pkg.otherCost);
+    var actualShipping = money(pkg.actualShipping);
+    var customerShipping = money(pkg.customerShipping);
+    return {
+      productCost: productCost,
+      otherCost: otherCost,
+      actualShipping: actualShipping,
+      customerShipping: customerShipping,
+      direct: cents(productCost + otherCost + actualShipping),
+    };
+  }
+
+  function ratesOf(settings) {
+    settings = settings || {};
+    return {
+      vatRate: percent(blank(settings.vat) ? settings.vatGames : settings.vat),
+      cardRate: percent(settings.cardCommission),
+      cardFixed: money(settings.cardFixed),
+      taxRate: percent(settings.companyTax),
+    };
+  }
+
   function calculate(pkg, settings) {
     pkg = pkg || {};
     settings = settings || {};
 
     var price = money(pkg.price);
-    var productCost = money(pkg.productCost);
-    var giftCost = money(pkg.giftCost);
-    var packagingCost = money(pkg.packagingCost);
-    var actualShipping = money(pkg.actualShipping);
-    var customerShipping = money(pkg.customerShipping);
-    var productType =
-      pkg.productType === "stationery" ? "stationery" : pkg.productType === "games" ? "games" : "";
+    var costs = costsOf(pkg);
+    var rates = ratesOf(settings);
     var priceIncludesVat = includesVatOf(pkg.priceIncludesVat);
-
-    var vatGames = percent(settings.vatGames);
-    var vatStationery = percent(settings.vatStationery);
-    var vatRate = productType === "stationery" ? vatStationery : vatGames;
-    var cardRate = percent(settings.cardCommission);
-    var cardFixed = money(settings.cardFixed);
-    var taxRate = percent(settings.companyTax);
-    var shippingGap = cents(actualShipping - customerShipping);
-    var ready = productType !== "" && priceIncludesVat !== null;
+    var shippingGap = cents(costs.actualShipping - costs.customerShipping);
+    var ready = priceIncludesVat !== null;
 
     var base = {
       ready: ready,
-      productType: productType,
       priceIncludesVat: priceIncludesVat,
-      vatGames: vatGames,
-      vatStationery: vatStationery,
-      vatRate: vatRate,
-      cardRate: cardRate,
-      cardFixed: cardFixed,
-      taxRate: taxRate,
+      vatRate: rates.vatRate,
+      cardRate: rates.cardRate,
+      cardFixed: rates.cardFixed,
+      taxRate: rates.taxRate,
       price: price,
-      customerShipping: customerShipping,
+      customerShipping: costs.customerShipping,
+      directCosts: ready ? costs.direct : null,
       shippingGap: shippingGap,
     };
 
@@ -120,10 +136,15 @@
       });
     }
 
+    var vatRate = rates.vatRate;
+    var cardRate = rates.cardRate;
+    var cardFixed = rates.cardFixed;
+    var taxRate = rates.taxRate;
+    var customerShipping = costs.customerShipping;
+    var directCosts = costs.direct;
     var vat = cents(priceIncludesVat ? (price * vatRate) / (100 + vatRate) : (price * vatRate) / 100);
     var customerPays = cents(priceIncludesVat ? price + customerShipping : price + vat + customerShipping);
     var revenueExVat = cents(customerPays - vat);
-    var directCosts = cents(productCost + giftCost + packagingCost + actualShipping);
     var cardFee = cents(customerPays * (cardRate / 100) + cardFixed);
     var profitBeforeTax = cents(revenueExVat - directCosts - cardFee);
     var companyTax = profitBeforeTax > 0 ? cents(profitBeforeTax * (taxRate / 100)) : 0;
@@ -143,5 +164,59 @@
     });
   }
 
-  return { calculate: calculate, num: num };
+  function priceForMargin(pkg, settings, targetMargin) {
+    pkg = pkg || {};
+    settings = settings || {};
+    if (blank(targetMargin)) return { ready: false, reason: "enter" };
+
+    var target = percent(targetMargin);
+    var marginFraction = target / 100;
+    if (marginFraction >= 1) return { ready: false, reason: "under-100" };
+
+    var priceIncludesVat = includesVatOf(pkg.priceIncludesVat);
+    if (priceIncludesVat === null) return { ready: false, reason: "vat-choice" };
+
+    var rates = ratesOf(settings);
+    var costs = costsOf(pkg);
+    var vatFraction = rates.vatRate / 100;
+    var cardFraction = rates.cardRate / 100;
+    var taxFraction = rates.taxRate / 100;
+    if (taxFraction >= 1 && marginFraction > 0) return { ready: false, reason: "tax" };
+
+    var alpha = taxFraction < 1 ? marginFraction / (1 - taxFraction) : marginFraction;
+    var keptShipping = costs.customerShipping * (1 - cardFraction) - costs.direct - rates.cardFixed;
+    var numerator = alpha * costs.customerShipping - keptShipping;
+    var denominator = priceIncludesVat
+      ? (1 - alpha) / (1 + vatFraction) - cardFraction
+      : 1 - alpha - cardFraction * (1 + vatFraction);
+
+    if (!(denominator > 1e-9)) return { ready: false, reason: "impossible" };
+
+    var raw = numerator / denominator;
+    var overshot = raw < 0;
+    var price = overshot ? 0 : cents(raw);
+    var guard = 0;
+    var quote = calculate(Object.assign({}, pkg, { price: price }), settings);
+    while (
+      !overshot &&
+      quote.ready &&
+      quote.margin !== null &&
+      quote.margin + 1e-6 < target &&
+      guard < 50
+    ) {
+      price = cents(price + 0.01);
+      quote = calculate(Object.assign({}, pkg, { price: price }), settings);
+      guard += 1;
+    }
+
+    return {
+      ready: true,
+      price: price,
+      overshot: overshot,
+      target: target,
+      quote: quote,
+    };
+  }
+
+  return { calculate: calculate, priceForMargin: priceForMargin, num: num };
 });

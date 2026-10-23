@@ -2,13 +2,12 @@
   var SETTINGS_KEY = "technova-profit-settings";
   var PACKAGES_KEY = "technova-profit-packages";
 
-  var settingFields = ["vatGames", "vatStationery", "cardCommission", "cardFixed", "companyTax"];
+  var settingFields = ["vat", "cardCommission", "cardFixed", "companyTax"];
   var packageFields = [
     "name",
     "price",
     "productCost",
-    "giftCost",
-    "packagingCost",
+    "otherCost",
     "actualShipping",
     "customerShipping",
   ];
@@ -81,9 +80,7 @@
     packageFields.forEach(function (id) {
       pkg[id] = document.getElementById(id).value;
     });
-    var type = document.querySelector('input[name="productType"]:checked');
     var vat = document.querySelector('input[name="priceIncludesVat"]:checked');
-    pkg.productType = type ? type.value : "";
     pkg.priceIncludesVat = vat ? vat.value === "yes" : null;
     return pkg;
   }
@@ -97,11 +94,14 @@
 
   function writePackage(pkg) {
     pkg = pkg || {};
+    var other = pkg.otherCost;
+    if ((other == null || String(other).trim() === "") && (pkg.giftCost || pkg.packagingCost)) {
+      var extra = TechnovaCalc.num(pkg.giftCost) + TechnovaCalc.num(pkg.packagingCost);
+      other = extra ? String(extra) : "";
+    }
+    pkg = Object.assign({}, pkg, { otherCost: other });
     packageFields.forEach(function (id) {
       document.getElementById(id).value = pkg[id] != null ? pkg[id] : "";
-    });
-    document.querySelectorAll('input[name="productType"]').forEach(function (input) {
-      input.checked = input.value === pkg.productType;
     });
     document.querySelectorAll('input[name="priceIncludesVat"]').forEach(function (input) {
       if (pkg.priceIncludesVat === true) input.checked = input.value === "yes";
@@ -118,22 +118,16 @@
     var scope = " Shipping the customer pays is not taxed.";
     if (!result.ready) {
       return (
-        "If the price includes VAT: package price × VAT rate / (100 + VAT rate). If it does not: package price × VAT rate / 100." +
+        "If the price includes VAT: item price × VAT rate / (100 + VAT rate). If it does not: item price × VAT rate / 100." +
         scope
       );
     }
-    var rate =
-      result.productType === "stationery"
-        ? enteredRate(settings.vatStationery, result.vatStationery)
-        : enteredRate(settings.vatGames, result.vatGames);
+    var rate = enteredRate(settings.vat, result.vatRate);
     var rateText = rate || "VAT rate";
     var rateNumber = rate ? rate.replace("%", "") : "VAT rate";
-    var kind = result.productType === "stationery" ? "stationery" : "games";
     if (result.priceIncludesVat) {
       return (
-        "Pulled out of the package price at the " +
-        kind +
-        " rate: package price × " +
+        "Pulled out of the item price: item price × " +
         rateText +
         " / (100 + " +
         rateNumber +
@@ -141,14 +135,7 @@
         scope
       );
     }
-    return (
-      "Added on top of the package price at the " +
-      kind +
-      " rate: package price × " +
-      rateText +
-      " / 100." +
-      scope
-    );
+    return "Added on top of the item price: item price × " + rateText + " / 100." + scope;
   }
 
   function cardFormula(settings, result) {
@@ -168,9 +155,9 @@
   }
 
   function customerPaysFormula(result) {
-    if (!result.ready) return "Package price + customer shipping, with VAT added when the price excludes it.";
-    if (result.priceIncludesVat) return "Package price + customer shipping.";
-    return "Package price + VAT + customer shipping.";
+    if (!result.ready) return "Item price + customer shipping, with VAT added when the price excludes it.";
+    if (result.priceIncludesVat) return "Item price + customer shipping.";
+    return "Item price + VAT + customer shipping.";
   }
 
   function render() {
@@ -179,10 +166,6 @@
     var result = TechnovaCalc.calculate(pkg, settings);
     var ready = result.ready;
     var loss = ready && result.netProfit < 0;
-
-    document.querySelectorAll("[data-rate]").forEach(function (field) {
-      field.dataset.active = String(field.dataset.rate === result.productType);
-    });
 
     setText("cardPrice", ready ? formatMoney(result.price) : "—");
     setText("cardShipping", ready ? formatMoney(result.customerShipping) : "—");
@@ -211,22 +194,22 @@
     var name = pkg.name.trim();
     setText(
       "packageCaption",
-      ready ? name || "Untitled package" : "Choose a product type and whether the price includes VAT."
+      ready ? name || "Untitled item" : "Say whether the price includes VAT."
     );
 
     var summary;
     if (!ready) {
-      summary = "Net profit and margin appear once the package can be calculated.";
+      summary = "Net profit and margin appear once the item can be calculated.";
     } else if (result.margin === null && loss) {
       summary =
-        "This package loses " +
+        "This item loses " +
         formatMoney(Math.abs(result.netProfit)) +
         ". Margin needs revenue excluding VAT.";
     } else if (result.margin === null) {
       summary = "Margin needs revenue excluding VAT.";
     } else if (loss) {
       summary =
-        "This package loses " +
+        "This item loses " +
         formatMoney(Math.abs(result.netProfit)) +
         ". Margin is " +
         formatPercent(result.margin) +
@@ -248,8 +231,52 @@
       setText("shippingCover", gapText);
     }
 
+    renderTarget(pkg, settings);
     writeJson(SETTINGS_KEY, settings);
     renderSaved(settings);
+  }
+
+  function renderTarget(pkg, settings) {
+    var asked = document.getElementById("targetMargin").value;
+    var quote = TechnovaCalc.priceForMargin(pkg, settings, asked);
+    var note = document.getElementById("targetNote");
+    var use = document.getElementById("useTargetPrice");
+    document.getElementById("target").classList.toggle("is-waiting", !quote.ready);
+    var reasons = {
+      enter: "Enter a target margin, such as 40.",
+      "under-100": "The margin has to be under 100%.",
+      "vat-choice": "Say whether the price includes VAT.",
+      tax: "Company tax of 100% leaves no net profit.",
+      impossible: "These rates take more than that margin. Lower the target, the card commission, or the tax.",
+    };
+
+    if (!quote.ready) {
+      setText("targetPrice", "—");
+      setText("targetPays", "—");
+      setText("targetActual", "—");
+      setText("targetHow", "Net profit ÷ revenue excluding VAT, after VAT, card fees, and company tax.");
+      note.textContent = reasons[quote.reason] || "";
+      use.hidden = true;
+      return;
+    }
+
+    setText("targetPrice", formatMoney(quote.price));
+    setText("targetPays", formatMoney(quote.quote.customerPays));
+    setText("targetActual", formatPercent(quote.quote.margin));
+    setText(
+      "targetHow",
+      quote.priceIncludesVat || quote.quote.priceIncludesVat
+        ? "Item price that keeps this margin. VAT is already inside the price."
+        : "Item price before VAT. VAT is added on top for the customer."
+    );
+    note.textContent = quote.overshot
+      ? "Customer shipping already produces this margin, so the item price is " + formatMoney(0) + "."
+      : "At this price the net margin is " +
+        formatPercent(quote.quote.margin) +
+        ". Net profit is " +
+        formatMoney(quote.quote.netProfit) +
+        ".";
+    use.hidden = false;
   }
 
   function labeledStat(label, value, isLoss) {
@@ -278,7 +305,7 @@
       row.className = "saved-row";
       if (item.id === activeId) row.classList.add("is-open");
 
-      var label = (pkg.name && String(pkg.name).trim()) || "Untitled package";
+      var label = (pkg.name && String(pkg.name).trim()) || "Untitled item";
       var open = document.createElement("button");
       open.type = "button";
       open.className = "open name-cell";
@@ -339,13 +366,16 @@
     });
   }
 
-  writeSettings(readJson(SETTINGS_KEY, {}));
+  var storedSettings = readJson(SETTINGS_KEY, {});
+  if (storedSettings && blank(storedSettings.vat) && !blank(storedSettings.vatGames)) {
+    storedSettings.vat = storedSettings.vatGames;
+  }
+  writeSettings(storedSettings);
   writePackage({});
 
   document.querySelectorAll(".calc-wrap input").forEach(function (input) {
     function onEdit() {
       if (
-        input.name === "productType" ||
         input.name === "priceIncludesVat" ||
         packageFields.indexOf(input.id) !== -1
       ) {
@@ -364,16 +394,12 @@
 
   document.getElementById("savePackage").addEventListener("click", function () {
     var pkg = readPackage();
-    if (!pkg.productType) {
-      setStatus("Choose Games or Stationery before saving.");
-      return;
-    }
     if (pkg.priceIncludesVat === null) {
       setStatus("Say whether the price includes VAT before saving.");
       return;
     }
     if (packageIsEmpty(pkg)) {
-      setStatus("Enter a package name or price before saving.");
+      setStatus("Enter an item name or price before saving.");
       return;
     }
     var packages = readJson(PACKAGES_KEY, []);
@@ -391,6 +417,23 @@
     writePackage({});
     setStatus("");
     render();
+  });
+
+  document.getElementById("useTargetPrice").addEventListener("click", function () {
+    var quote = TechnovaCalc.priceForMargin(
+      readPackage(),
+      readSettings(),
+      document.getElementById("targetMargin").value
+    );
+    if (!quote.ready) return;
+    activeId = null;
+    document.getElementById("price").value = String(quote.price);
+    setStatus("");
+    render();
+    document.getElementById("results").scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
   });
 
   render();
