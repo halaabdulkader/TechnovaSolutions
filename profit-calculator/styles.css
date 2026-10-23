@@ -31,7 +31,9 @@
 }
 
 .calc-wrap button,
-.calc-wrap input {
+.calc-wrap input,
+.calc-wrap select,
+.calc-wrap textarea {
   font: inherit;
   color: inherit;
 }
@@ -112,9 +114,16 @@
   border-radius: 20px;
 }
 
-.settings {
+.settings,
+.example,
+#pricingRequest {
   padding: 22px;
   margin-bottom: 18px;
+}
+
+.example .answer {
+  margin-top: 16px;
+  margin-bottom: 0;
 }
 
 .panel-head,
@@ -198,17 +207,32 @@
 }
 
 .control:focus-within,
-.field.stack > input:focus {
+.field.stack > input:focus,
+.field.stack > select:focus,
+.field.stack > textarea:focus {
   border-color: var(--color-primary);
+  outline: none;
 }
 
-.field.stack > input {
+.field.stack > input,
+.field.stack > select,
+.field.stack > textarea {
   width: 100%;
   min-height: 48px;
   padding: 0 12px;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 12px;
+}
+
+.field.stack > textarea {
+  min-height: 96px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.request-note {
+  margin-top: 12px;
 }
 
 .calc-wrap input {
@@ -585,7 +609,10 @@
 }
 
 @media (max-width: 640px) {
-  .cost-grid,
+  .cost-grid {
+    grid-template-columns: 1fr;
+  }
+
   .metric-grid,
   .answer,
   .saved-row {

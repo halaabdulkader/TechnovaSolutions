@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technova item pricing. See what you keep after VAT, card fees, and tax, or set a net margin and get the price. A paid Technova service.">
+    <meta name="description" content="Technova prices the item so the margin holds after VAT, card fees, shipping, and tax. Send the item. We return the price.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="canonical" href="https://technovasolutions.com/profit-calculator/">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -12,11 +12,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://technovasolutions.com/profit-calculator/">
     <meta property="og:title" content="Item Pricing | Technova Solutions">
-    <meta property="og:description" content="Set a price that keeps a real margin after VAT, card fees, shipping, and tax.">
+    <meta property="og:description" content="Send Technova the item. We set the price that keeps the margin.">
     <meta property="og:site_name" content="Technova Solutions">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Item Pricing | Technova Solutions">
-    <meta name="twitter:description" content="Set a price that keeps a real margin after VAT, card fees, shipping, and tax.">
+    <meta name="twitter:description" content="Send Technova the item. We set the price that keeps the margin.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -51,272 +51,136 @@
             <header class="calc-intro">
                 <span class="section-tag">Paid service</span>
                 <h1>Item <span class="gradient-text">Pricing</span></h1>
-                <p>Price one item. See what the customer pays, what you keep, and the margin — or name the margin and get the price. Technova does this as a paid engagement for the whole catalog.</p>
+                <p>Technova sets the price. You send the item, the costs, and the margin you want to keep. We return the price after VAT, card fees, shipping, and tax. This page does not calculate it for you.</p>
             </header>
 
-            <section class="panel settings" aria-labelledby="settings-title">
+            <section class="panel example" aria-labelledby="example-title">
                 <div class="panel-head">
                     <div>
-                        <p class="index">1</p>
-                        <h2 id="settings-title">Fixed settings</h2>
+                        <h2 id="example-title">What you get back</h2>
                     </div>
-                    <p>These apply to every item until you change them. Stored in this browser.</p>
+                    <p>One example, so you can see the shape of the answer.</p>
                 </div>
-                <div class="settings-grid">
-                    <label class="field">
-                        <span>VAT</span>
-                        <span class="control">
-                            <input id="vat" inputmode="decimal" autocomplete="off" spellcheck="false">
-                            <span class="suffix">%</span>
-                        </span>
-                    </label>
-                    <label class="field">
-                        <span>Card commission</span>
-                        <span class="control">
-                            <input id="cardCommission" inputmode="decimal" autocomplete="off" spellcheck="false">
-                            <span class="suffix">%</span>
-                        </span>
-                    </label>
-                    <label class="field">
-                        <span>Card fee per payment</span>
-                        <span class="control">
-                            <input id="cardFixed" inputmode="decimal" autocomplete="off" spellcheck="false">
-                            <span class="suffix">TL</span>
-                        </span>
-                    </label>
-                    <label class="field">
-                        <span>Estimated company tax</span>
-                        <span class="control">
-                            <input id="companyTax" inputmode="decimal" autocomplete="off" spellcheck="false">
-                            <span class="suffix">%</span>
-                        </span>
-                    </label>
+                <p class="footnote">Item cost 100 TL. VAT 20%, already inside the price. No card fee and no company tax. The seller wants a 40% net margin.</p>
+                <div class="answer">
+                    <div class="answer-cell">
+                        <h3>Item price</h3>
+                        <p class="figure">200.00 TL</p>
+                        <p>The price for this example only.</p>
+                    </div>
+                    <div class="answer-cell">
+                        <h3>Net margin</h3>
+                        <p class="figure">40%</p>
+                        <p>After VAT, for this example.</p>
+                    </div>
                 </div>
-                <p class="footnote">Confirm the real rates with your product category, payment contract, and accountant.</p>
             </section>
 
-            <div class="workspace">
-                <form id="packageForm" class="panel entry" autocomplete="off" novalidate>
-                    <div class="panel-head" id="package-entry">
-                        <div>
-                            <p class="index">2</p>
-                            <h2 id="entry-title">Item</h2>
-                        </div>
-                        <p>Enter this for the item you are pricing.</p>
+            <form id="pricingRequest" class="panel entry" autocomplete="on" novalidate>
+                <div class="panel-head">
+                    <div>
+                        <h2 id="request-title">Send the item</h2>
                     </div>
-
+                    <p>We reply with the price. Nothing here is calculated in the browser.</p>
+                </div>
+                <div class="contact-honeypot" aria-hidden="true">
+                    <label for="pricing-honey">Do not fill</label>
+                    <input type="text" id="pricing-honey" name="_honey" tabindex="-1" autocomplete="off">
+                </div>
+                <div class="cost-grid">
                     <label class="field stack">
-                        <span>Item name</span>
-                        <input id="name" type="text" autocomplete="off">
+                        <span>Your name</span>
+                        <input id="pricing-name" name="name" type="text" autocomplete="name" required>
                     </label>
-
                     <label class="field stack">
-                        <span>Item price</span>
+                        <span>Email</span>
+                        <input id="pricing-email" name="email" type="email" autocomplete="email" required>
+                    </label>
+                    <label class="field stack wide">
+                        <span>Item name</span>
+                        <input id="pricing-item" name="item" type="text" autocomplete="off" required>
+                    </label>
+                    <label class="field stack">
+                        <span>Item cost</span>
                         <span class="control">
-                            <input id="price" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <input id="pricing-cost" name="item-cost" inputmode="decimal" autocomplete="off">
                             <span class="suffix">TL</span>
                         </span>
                     </label>
-
-                    <fieldset class="choice">
-                        <legend>Does the item price include VAT?</legend>
-                        <label>
-                            <input type="radio" name="priceIncludesVat" value="yes">
-                            <span>Yes</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="priceIncludesVat" value="no">
-                            <span>No</span>
-                        </label>
-                    </fieldset>
-
-                    <div class="cost-grid">
-                        <label class="field stack">
-                            <span>Item cost</span>
-                            <span class="control">
-                                <input id="productCost" inputmode="decimal" autocomplete="off" spellcheck="false">
-                                <span class="suffix">TL</span>
-                            </span>
-                        </label>
-                        <label class="field stack">
-                            <span>Other costs</span>
-                            <span class="control">
-                                <input id="otherCost" inputmode="decimal" autocomplete="off" spellcheck="false">
-                                <span class="suffix">TL</span>
-                            </span>
-                        </label>
-                        <label class="field stack">
-                            <span>Actual shipping cost</span>
-                            <span class="control">
-                                <input id="actualShipping" inputmode="decimal" autocomplete="off" spellcheck="false">
-                                <span class="suffix">TL</span>
-                            </span>
-                        </label>
-                        <label class="field stack wide">
-                            <span>Shipping the customer pays</span>
-                            <span class="control">
-                                <input id="customerShipping" inputmode="decimal" autocomplete="off" spellcheck="false">
-                                <span class="suffix">TL</span>
-                            </span>
-                        </label>
-                    </div>
-
-                    <p id="shippingNote" class="shipping-note" role="status" hidden></p>
-
-                    <div class="actions">
-                        <button id="savePackage" type="button" class="primary">Save this item</button>
-                        <button id="clearPackage" type="button" class="quiet">Clear item</button>
-                    </div>
-                    <p id="formStatus" class="form-status" role="status"></p>
-                </form>
-
-                <section id="results" class="screen is-waiting" aria-labelledby="result-title">
-                    <div class="screen-head">
-                        <div>
-                            <p class="index">3</p>
-                            <h2 id="result-title">Results</h2>
-                        </div>
-                        <p id="packageCaption">Say whether the price includes VAT.</p>
-                    </div>
-
-                    <div class="answer">
-                        <div class="answer-cell net" id="netCell">
-                            <h3>Net profit</h3>
-                            <p id="netValue" class="figure">—</p>
-                            <p>Profit before tax − company tax</p>
-                        </div>
-                        <div class="answer-cell margin" id="marginCell">
-                            <h3>Margin</h3>
-                            <p id="marginValue" class="figure">—</p>
-                            <p>Net profit ÷ revenue excluding VAT × 100</p>
-                        </div>
-                    </div>
-
-                    <div class="metric-grid">
-                        <article class="metric">
-                            <h3>Item price</h3>
-                            <p id="cardPrice" class="figure">—</p>
-                        </article>
-                        <article class="metric">
-                            <h3>Customer shipping</h3>
-                            <p id="cardShipping" class="figure">—</p>
-                        </article>
-                        <article class="metric">
-                            <h3>Amount the customer pays</h3>
-                            <p id="cardTotal" class="figure">—</p>
-                            <p id="cardTotalHow" class="caption">Item price + customer shipping, with VAT added when the price excludes it.</p>
-                        </article>
-                        <article class="metric">
-                            <h3>Direct costs</h3>
-                            <p id="cardCosts" class="figure">—</p>
-                            <p class="caption">Item cost + other costs + actual shipping</p>
-                        </article>
-                    </div>
-
-                    <p id="shippingCover" class="shipping-cover" hidden></p>
-
-                    <div class="result-list">
-                        <div class="result">
-                            <div>
-                                <h3>VAT</h3>
-                                <p id="vatHow">If the price includes VAT: item price × VAT rate / (100 + VAT rate). If it does not: item price × VAT rate / 100. Shipping the customer pays is not taxed.</p>
-                            </div>
-                            <p id="vatValue" class="figure">—</p>
-                        </div>
-                        <div class="result">
-                            <div>
-                                <h3>Revenue excluding VAT</h3>
-                                <p>Amount the customer pays − VAT</p>
-                            </div>
-                            <p id="revenueValue" class="figure">—</p>
-                        </div>
-                        <div class="result">
-                            <div>
-                                <h3>Card fee</h3>
-                                <p id="cardFeeHow">Amount the customer pays × commission rate + fixed fee.</p>
-                            </div>
-                            <p id="cardFeeValue" class="figure">—</p>
-                        </div>
-                        <div class="result" id="beforeTaxRow">
-                            <div>
-                                <h3>Profit before tax</h3>
-                                <p>Revenue excluding VAT − direct costs − card fee</p>
-                            </div>
-                            <p id="beforeTaxValue" class="figure">—</p>
-                        </div>
-                        <div class="result">
-                            <div>
-                                <h3>Company tax</h3>
-                                <p id="taxHow">Profit before tax × tax rate, only when the profit is positive. A loss has zero tax.</p>
-                            </div>
-                            <p id="taxValue" class="figure">—</p>
-                        </div>
-                    </div>
-                    <p id="summary" class="summary">Net profit and margin appear once the item can be calculated.</p>
-                </section>
-            </div>
-
-            <section id="target" class="panel target" aria-labelledby="target-title">
-                <div class="panel-head">
-                    <div>
-                        <p class="index">4</p>
-                        <h2 id="target-title">Price for a margin</h2>
-                    </div>
-                    <p>The item price that leaves this net margin after VAT, card fees, and company tax.</p>
-                </div>
-                <div class="target-layout">
+                    <label class="field stack">
+                        <span>Other costs</span>
+                        <span class="control">
+                            <input id="pricing-other" name="other-costs" inputmode="decimal" autocomplete="off">
+                            <span class="suffix">TL</span>
+                        </span>
+                    </label>
+                    <label class="field stack">
+                        <span>Actual shipping cost</span>
+                        <span class="control">
+                            <input id="pricing-ship" name="actual-shipping" inputmode="decimal" autocomplete="off">
+                            <span class="suffix">TL</span>
+                        </span>
+                    </label>
+                    <label class="field stack">
+                        <span>Shipping the customer pays</span>
+                        <span class="control">
+                            <input id="pricing-customer-ship" name="customer-shipping" inputmode="decimal" autocomplete="off">
+                            <span class="suffix">TL</span>
+                        </span>
+                    </label>
+                    <label class="field stack">
+                        <span>VAT</span>
+                        <span class="control">
+                            <input id="pricing-vat" name="vat" inputmode="decimal" autocomplete="off">
+                            <span class="suffix">%</span>
+                        </span>
+                    </label>
+                    <label class="field stack">
+                        <span>Price includes VAT</span>
+                        <select id="pricing-vat-included" name="price-includes-vat">
+                            <option value="">Not sure</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </label>
+                    <label class="field stack">
+                        <span>Card commission</span>
+                        <span class="control">
+                            <input id="pricing-card" name="card-commission" inputmode="decimal" autocomplete="off">
+                            <span class="suffix">%</span>
+                        </span>
+                    </label>
+                    <label class="field stack">
+                        <span>Card fee per payment</span>
+                        <span class="control">
+                            <input id="pricing-fee" name="card-fee" inputmode="decimal" autocomplete="off">
+                            <span class="suffix">TL</span>
+                        </span>
+                    </label>
+                    <label class="field stack">
+                        <span>Estimated company tax</span>
+                        <span class="control">
+                            <input id="pricing-tax" name="company-tax" inputmode="decimal" autocomplete="off">
+                            <span class="suffix">%</span>
+                        </span>
+                    </label>
                     <label class="field stack">
                         <span>Target net margin</span>
                         <span class="control">
-                            <input id="targetMargin" inputmode="decimal" autocomplete="off" spellcheck="false">
+                            <input id="pricing-margin" name="target-margin" inputmode="decimal" autocomplete="off">
                             <span class="suffix">%</span>
                         </span>
                     </label>
-                    <div class="answer-cell">
-                        <h3>Item price</h3>
-                        <p id="targetPrice" class="figure">—</p>
-                        <p id="targetHow">Net profit ÷ revenue excluding VAT, after VAT, card fees, and company tax.</p>
-                    </div>
-                    <div class="target-side">
-                        <article class="metric">
-                            <h3>Amount the customer pays</h3>
-                            <p id="targetPays" class="figure">—</p>
-                        </article>
-                        <article class="metric">
-                            <h3>Margin at this price</h3>
-                            <p id="targetActual" class="figure">—</p>
-                        </article>
-                    </div>
                 </div>
-                <p id="targetNote" class="target-note">Enter a target margin, such as 40.</p>
+                <label class="field stack request-note">
+                    <span>Anything else</span>
+                    <textarea id="pricing-note" name="note" rows="3" placeholder="Catalog size, payment provider, or the margin you need on every item."></textarea>
+                </label>
+                <p id="pricingStatus" class="form-status" role="status"></p>
                 <div class="actions">
-                    <button id="useTargetPrice" type="button" class="primary" hidden>Use this price</button>
+                    <button type="submit" class="primary"><span>Send this item</span></button>
                 </div>
-            </section>
-
-            <section class="service-ask" aria-labelledby="service-title">
-                <div>
-                    <span class="section-tag">Paid service</span>
-                    <h2 id="service-title">Put this price on the whole catalog</h2>
-                    <p>Technova sets each item so the margin holds after VAT, payment fees, shipping, and tax. This page is how that engagement starts.</p>
-                </div>
-                <a class="btn btn-primary btn-large" href="../index.html#contact" data-prefill="pricing" data-offer="margin-pricing">
-                    <span>Ask Technova to price this</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </section>
-
-            <section id="savedSection" class="panel saved" hidden>
-                <div class="panel-head">
-                    <div>
-                        <h2>Saved items</h2>
-                    </div>
-                    <p>Reopen an item to compare margins. Stored in this browser only.</p>
-                </div>
-                <div id="savedList" class="saved-list"></div>
-            </section>
+            </form>
         </div>
     </main>
 
@@ -345,7 +209,5 @@
     </footer>
 
     <script src="../script.js"></script>
-    <script src="calculator.js"></script>
-    <script src="app.js"></script>
 </body>
 </html>

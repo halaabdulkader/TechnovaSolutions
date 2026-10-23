@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
     initLeadPrefill();
     initContactForm();
+    initPricingRequest();
     initScrollAnimations();
 });
 
@@ -278,6 +279,145 @@ function initContactForm() {
             showNotification('Connection problem. Try again in a moment, or open an email draft below.', 'error', {
                 duration: 9000,
                 mailtoHref: quoteMailtoLink(data),
+                mailtoLabel: 'Open email draft'
+            });
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.removeAttribute('aria-busy');
+                if (btnLabel && submitLabel) btnLabel.textContent = submitLabel;
+            }
+        }
+    });
+}
+
+function pricingMailtoLink(data) {
+    const subject = 'Item pricing request — Technova Solutions';
+    const body = [
+        `Name: ${data.name}`,
+        `Email: ${data.email}`,
+        `Item: ${data.item}`,
+        `Item cost: ${data.cost || '—'}`,
+        `Other costs: ${data.other || '—'}`,
+        `Actual shipping: ${data.ship || '—'}`,
+        `Customer shipping: ${data.customerShip || '—'}`,
+        `VAT: ${data.vat || '—'}`,
+        `Price includes VAT: ${data.vatIncluded || '—'}`,
+        `Card commission: ${data.card || '—'}`,
+        `Card fee: ${data.fee || '—'}`,
+        `Company tax: ${data.tax || '—'}`,
+        `Target net margin: ${data.margin || '—'}`,
+        '',
+        'Note:',
+        data.note || '—'
+    ].join('\n');
+    return `mailto:${CONTACT_INBOX}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function initPricingRequest() {
+    const form = document.getElementById('pricingRequest');
+    if (!form) return;
+
+    const status = document.getElementById('pricingStatus');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const btnLabel = submitBtn?.querySelector('span');
+    const submitLabel = btnLabel?.textContent ?? '';
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fd = new FormData(form);
+        if ((fd.get('_honey') || '').toString().trim() !== '') {
+            return;
+        }
+
+        const data = {
+            name: (fd.get('name') || '').toString().trim(),
+            email: (fd.get('email') || '').toString().trim(),
+            item: (fd.get('item') || '').toString().trim(),
+            cost: (fd.get('item-cost') || '').toString().trim(),
+            other: (fd.get('other-costs') || '').toString().trim(),
+            ship: (fd.get('actual-shipping') || '').toString().trim(),
+            customerShip: (fd.get('customer-shipping') || '').toString().trim(),
+            vat: (fd.get('vat') || '').toString().trim(),
+            vatIncluded: (fd.get('price-includes-vat') || '').toString().trim(),
+            card: (fd.get('card-commission') || '').toString().trim(),
+            fee: (fd.get('card-fee') || '').toString().trim(),
+            tax: (fd.get('company-tax') || '').toString().trim(),
+            margin: (fd.get('target-margin') || '').toString().trim(),
+            note: (fd.get('note') || '').toString().trim()
+        };
+
+        const payload = {
+            name: data.name,
+            email: data.email,
+            item: data.item,
+            'item-cost': data.cost || '—',
+            'other-costs': data.other || '—',
+            'actual-shipping': data.ship || '—',
+            'customer-shipping': data.customerShip || '—',
+            vat: data.vat || '—',
+            'price-includes-vat': data.vatIncluded || 'Not sure',
+            'card-commission': data.card || '—',
+            'card-fee': data.fee || '—',
+            'company-tax': data.tax || '—',
+            'target-margin': data.margin || '—',
+            note: data.note || '—',
+            _subject: `Item pricing request — ${data.item || data.name}`,
+            _template: 'table',
+            _captcha: false
+        };
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
+            if (btnLabel) btnLabel.textContent = 'Sending…';
+        }
+        if (status) {
+            status.textContent = '';
+            status.classList.remove('is-saved');
+        }
+
+        try {
+            const res = await fetch(FORMSUBMIT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const json = await res.json().catch(() => ({}));
+            const ok =
+                res.ok && (json.success === 'true' || json.success === true || json.success === 'True');
+
+            if (ok) {
+                if (status) {
+                    status.textContent = 'Sent. We will reply with the price.';
+                    status.classList.add('is-saved');
+                }
+                showNotification('Sent. We will reply with the price for this item.', 'success');
+                form.reset();
+            } else {
+                const hint =
+                    typeof json.message === 'string'
+                        ? json.message
+                        : typeof json.error === 'string'
+                          ? json.error
+                          : 'Please try again or use the email link.';
+                if (status) status.textContent = "Couldn't send. Use the email link.";
+                showNotification(`Couldn't send: ${hint}`, 'error', {
+                    duration: 8000,
+                    mailtoHref: pricingMailtoLink(data),
+                    mailtoLabel: 'Open email draft'
+                });
+            }
+        } catch {
+            if (status) status.textContent = 'Connection problem. Use the email link.';
+            showNotification('Connection problem. Try again in a moment, or open an email draft below.', 'error', {
+                duration: 9000,
+                mailtoHref: pricingMailtoLink(data),
                 mailtoLabel: 'Open email draft'
             });
         } finally {
