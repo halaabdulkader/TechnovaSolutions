@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acbak Surprise — Profit Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div>
+          <p class="brand">Acbak Surprise</p>
+          <h1>Profit Calculator</h1>
+        </div>
+        <p class="lede">
+          أدخل سعر الباقة وتكاليفها مرة واحدة. الحاسبة تستخرج الضريبة والعمولة، وتعطيك صافي الربح وهامشه.
+        </p>
+      </header>
+
+      <section class="panel settings" aria-labelledby="settings-title">
+        <div class="panel-head">
+          <div>
+            <p class="index">١</p>
+            <h2 id="settings-title">الإعدادات الثابتة</h2>
+          </div>
+          <p>تبقى محفوظة لكل الباقات إلى أن تغيّرها.</p>
+        </div>
+        <div class="settings-grid">
+          <label class="field" data-rate="games">
+            <span>KDV للألعاب</span>
+            <span class="control">
+              <input id="kdvGames" inputmode="decimal" autocomplete="off" />
+              <span class="suffix">%</span>
+            </span>
+          </label>
+          <label class="field" data-rate="stationery">
+            <span>KDV للقرطاسية</span>
+            <span class="control">
+              <input id="kdvStationery" inputmode="decimal" autocomplete="off" />
+              <span class="suffix">%</span>
+            </span>
+          </label>
+          <label class="field">
+            <span>عمولة iyzico</span>
+            <span class="control">
+              <input id="iyzicoRate" inputmode="decimal" autocomplete="off" />
+              <span class="suffix">%</span>
+            </span>
+          </label>
+          <label class="field">
+            <span>رسم iyzico لكل عملية</span>
+            <span class="control">
+              <input id="iyzicoFixed" inputmode="decimal" autocomplete="off" />
+              <span class="suffix">TL</span>
+            </span>
+          </label>
+          <label class="field">
+            <span>ضريبة الشركة التقديرية</span>
+            <span class="control">
+              <input id="companyTax" inputmode="decimal" autocomplete="off" />
+              <span class="suffix">%</span>
+            </span>
+          </label>
+        </div>
+        <p class="footnote">
+          قيم مبدئية للحساب. تأكد من النسبة الفعلية حسب نوع السلعة، وعقد iyzico، وما يعتمده المحاسب.
+        </p>
+      </section>
+
+      <div class="workspace">
+        <section class="panel entry" aria-labelledby="entry-title">
+          <div class="panel-head">
+            <div>
+              <p class="index">٢</p>
+              <h2 id="entry-title">بيانات الباقة</h2>
+            </div>
+            <p>تدخلها لكل باقة تبيعها.</p>
+          </div>
+
+          <label class="field stack">
+            <span>اسم الباقة</span>
+            <input id="name" type="text" autocomplete="off" placeholder="باقة صلصال 1+2" />
+          </label>
+
+          <fieldset class="choice">
+            <legend>نوع المنتج</legend>
+            <label>
+              <input type="radio" name="productType" value="games" />
+              <span>ألعاب</span>
+            </label>
+            <label>
+              <input type="radio" name="productType" value="stationery" />
+              <span>قرطاسية</span>
+            </label>
+          </fieldset>
+
+          <label class="field stack">
+            <span>سعر الباقة</span>
+            <span class="control">
+              <input id="price" inputmode="decimal" autocomplete="off" />
+              <span class="suffix">TL</span>
+            </span>
+          </label>
+
+          <fieldset class="choice">
+            <legend>هل سعر الباقة شامل KDV؟</legend>
+            <label>
+              <input type="radio" name="priceIncludesKdv" value="yes" />
+              <span>نعم</span>
+            </label>
+            <label>
+              <input type="radio" name="priceIncludesKdv" value="no" />
+              <span>لا</span>
+            </label>
+          </fieldset>
+
+          <div class="cost-grid">
+            <label class="field stack">
+              <span>تكلفة المنتجات</span>
+              <span class="control">
+                <input id="productCost" inputmode="decimal" autocomplete="off" />
+                <span class="suffix">TL</span>
+              </span>
+            </label>
+            <label class="field stack">
+              <span>تكلفة الهدية</span>
+              <span class="control">
+                <input id="giftCost" inputmode="decimal" autocomplete="off" />
+                <span class="suffix">TL</span>
+              </span>
+            </label>
+            <label class="field stack">
+              <span>تكلفة التغليف</span>
+              <span class="control">
+                <input id="packagingCost" inputmode="decimal" autocomplete="off" />
+                <span class="suffix">TL</span>
+              </span>
+            </label>
+            <label class="field stack">
+              <span>الشحن الفعلي</span>
+              <span class="control">
+                <input id="actualShipping" inputmode="decimal" autocomplete="off" />
+                <span class="suffix">TL</span>
+              </span>
+            </label>
+            <label class="field stack wide">
+              <span>الشحن الذي يدفعه الزبون</span>
+              <span class="control">
+                <input id="customerShipping" inputmode="decimal" autocomplete="off" />
+                <span class="suffix">TL</span>
+              </span>
+            </label>
+          </div>
+
+          <p id="shippingNote" class="shipping-note" hidden></p>
+
+          <div class="actions">
+            <button id="savePackage" type="button">احفظ هذه الباقة</button>
+            <button id="resetExample" type="button" class="quiet">مثال باقة الصلصال</button>
+          </div>
+        </section>
+
+        <section class="screen" aria-labelledby="result-title">
+          <div class="screen-head">
+            <div>
+              <p class="index">٣</p>
+              <h2 id="result-title">Acbak Surprise — Profit Calculator</h2>
+            </div>
+            <p id="packageCaption"></p>
+          </div>
+
+          <div class="answer">
+            <div class="answer-cell net">
+              <h3>صافي الربح</h3>
+              <p id="netValue" class="figure" dir="ltr"></p>
+              <p>الربح قبل الضريبة − ضريبة الشركة</p>
+            </div>
+            <div class="answer-cell margin">
+              <h3>هامش الربح</h3>
+              <p id="marginValue" class="figure" dir="ltr"></p>
+              <p>صافي الربح ÷ الإيراد بدون KDV × 100</p>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric">
+              <h3>سعر الباقة</h3>
+              <p id="cardPrice" class="figure" dir="ltr"></p>
+              <span class="tag">متغير</span>
+            </article>
+            <article class="metric">
+              <h3>الشحن على الزبون</h3>
+              <p id="cardShipping" class="figure" dir="ltr"></p>
+              <span class="tag">متغير</span>
+            </article>
+            <article class="metric">
+              <h3>إجمالي الدفع</h3>
+              <p id="cardTotal" class="figure" dir="ltr"></p>
+              <span class="tag auto">تلقائي</span>
+            </article>
+            <article class="metric">
+              <h3>التكاليف المباشرة</h3>
+              <p id="cardCosts" class="figure" dir="ltr"></p>
+              <span class="tag auto">تلقائي</span>
+            </article>
+          </div>
+
+          <div class="result-list">
+            <div class="result">
+              <div>
+                <h3>KDV</h3>
+                <p id="kdvHow"></p>
+              </div>
+              <p id="kdvValue" class="figure" dir="ltr"></p>
+            </div>
+            <div class="result">
+              <div>
+                <h3>الإيراد بدون KDV</h3>
+                <p>مجموع الدفع − KDV</p>
+              </div>
+              <p id="revenueValue" class="figure" dir="ltr"></p>
+            </div>
+            <div class="result">
+              <div>
+                <h3>عمولة iyzico</h3>
+                <p>نسبة العمولة + الرسم الثابت، على مجموع الدفع</p>
+              </div>
+              <p id="commissionValue" class="figure" dir="ltr"></p>
+            </div>
+            <div class="result">
+              <div>
+                <h3>الربح قبل ضريبة الشركة</h3>
+                <p>الإيراد بدون KDV − التكاليف − العمولة</p>
+              </div>
+              <p id="beforeTaxValue" class="figure" dir="ltr"></p>
+            </div>
+            <div class="result">
+              <div>
+                <h3>ضريبة الشركة التقديرية</h3>
+                <p>الربح الموجب × نسبة الضريبة</p>
+              </div>
+              <p id="taxValue" class="figure" dir="ltr"></p>
+            </div>
+          </div>
+          <p id="summary" class="summary"></p>
+        </section>
+      </div>
+
+      <section id="savedSection" class="panel saved" hidden>
+        <div class="panel-head">
+          <div>
+            <h2>الباقات المحفوظة</h2>
+          </div>
+          <p>لمقارنة الهامش بين الباقات على هذا الجهاز.</p>
+        </div>
+        <div id="savedList" class="saved-list"></div>
+      </section>
+    </div>
+    <script src="calculator.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
